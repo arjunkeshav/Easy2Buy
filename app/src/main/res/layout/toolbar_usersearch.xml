@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#d22532"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/rect"
+        android:gravity="center"
+        android:padding="5dp">
+
+
+    <ImageView
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:src="@drawable/barrow" />
+
+        <View
+            android:layout_width="0.9dp"
+            android:layout_height="30.7dp"
+            android:background="#f5f5f5"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/search_grey"
+            android:layout_marginLeft="8dp"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:text="Restaurants"
+            android:textSize="14.4sp"
+            android:layout_marginLeft="8.7dp"
+            android:textColor="#4a4a4a"/>
+
+        <View
+            android:layout_width="0.9dp"
+            android:layout_height="30.7dp"
+            android:background="#f5f5f5"
+            android:layout_marginLeft="70dp"/>
+
+        <ImageView
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@drawable/ic_pin"
+            android:layout_marginLeft="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Italia"
+            android:layout_marginLeft="5dp"
+            android:textSize="14.4sp"
+            android:textColor="#4a4a4a"/>
+    </LinearLayout>
+</LinearLayout>

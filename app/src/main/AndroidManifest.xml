@@ -7,8 +7,9 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".Contxt_chek"
@@ -18,13 +19,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".login.SignUpActivity" />
+        <activity android:name=".login.SignInActivity" />
+        <activity android:name=".user.UserProfileActivity" />
+        <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,8 +44,25 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".home.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:name=".map.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".user.UserDashboardActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".admin.AdminDashboardActivity"
+            android:label="@string/title_activity_admin_dashboard"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".vendor.VendorDashboardActivity"
+            android:label="VendorDashboard"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity android:name=".user.UserSearchActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".user.UserDashboardActivity"
+    tools:showIn="@layout/app_bar_user_dashboard"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/homebg">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="44.2dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/men5"
+            android:layout_marginLeft="24dp"
+            app:civ_border_color="#FF000000" />
+
+        <customfonts.MyTextView_Roboto_Regular
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hi, John"
+            android:textSize="19.2sp"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="13.4dp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <customfonts.MyTextView_Roboto_Regular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What can \nwe serve you \ntoday?"
+        android:textSize="38.4sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="53.8dp"
+        android:layout_marginLeft="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/rectangle_2"
+        android:layout_marginTop="41dp"
+        android:layout_marginLeft="22.1dp"
+        android:layout_marginRight="21.1dp"
+        android:paddingTop="15.5dp"
+        android:paddingBottom="15.5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12.5dp"
+            android:src="@drawable/ic_search_black_24dp"
+            android:tint="#d0d0d0"/>
+
+        <customfonts.EditText_Roboto_Regular
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.7dp"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:hint="Search for address, food..."
+            android:textColor="#ffffff"
+            android:textColorHint="#9b9b9b"
+            android:textSize="14.4sp" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="15.4dp"
+            android:src="@drawable/ic_places"
+            android:tint="#d22532"/>
+    </LinearLayout>
+
+    <customfonts.MyTextView_Roboto_Regular
+        android:id="@+id/txtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22.1dp"
+        android:layout_marginRight="21.1dp"
+        android:layout_marginTop="22.1dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:text="SEARCH"
+        android:textColor="#ffffff"
+        android:textSize="14.4sp" />
+</LinearLayout>
+
+<com.roughike.bottombar.BottomBar
+    android:id="@+id/bottomBar"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    app:bb_tabXmlResource="@xml/bottombar" />
+
+
+</RelativeLayout>

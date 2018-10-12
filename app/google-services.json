@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1048037533390",
+    "firebase_url": "https://easy2buy-c7541.firebaseio.com",
+    "project_id": "easy2buy-c7541",
+    "storage_bucket": "easy2buy-c7541.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048037533390:android:5406c94f6e064d20",
+        "android_client_info": {
+          "package_name": "com.example.arjun.easy2buy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048037533390-ib8lpccbosgt47213jumo0udeotv486n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.arjun.easy2buy",
+            "certificate_hash": "0f0225d4fdaff5845beceaffa23930248554681c"
+          }
+        },
+        {
+          "client_id": "1048037533390-bdm66sadaoa11c0a2e1ntl2h8r3nm1gg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClU-i6F6ArFRxzCvTf8BvGecALCUtIxUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048037533390-bdm66sadaoa11c0a2e1ntl2h8r3nm1gg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
