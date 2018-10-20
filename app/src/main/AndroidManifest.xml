@@ -57,12 +57,14 @@
         <activity
             android:name=".vendor.VendorDashboardActivity"
             android:label="VendorDashboard"
-            android:theme="@style/AppTheme">
-
-        </activity>
-        <activity android:name=".user.UserSearchActivity">
-
-        </activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".user.UserSearchActivity" />
+        <activity android:name=".user.UserHomeActivity" />
+        <activity
+            android:name=".user.UserProfileDemo"
+            android:label="@string/title_activity_user_profile_demo"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".vendor.AddproductActivity"></activity>
     </application>
 
 </manifest>

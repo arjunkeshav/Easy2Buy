@@ -1,63 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#d22532"
+    android:background="#f4a004"
     android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@drawable/rect"
         android:gravity="center"
+        android:orientation="horizontal"
         android:padding="5dp">
 
 
-    <ImageView
-        android:layout_width="17dp"
-        android:layout_height="17dp"
-        android:src="@drawable/barrow" />
+        <ImageButton
+            android:id="@+id/imgBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/bkgd_transparent1"
+            android:onClick="onClick"
+            android:src="@drawable/barrow" />
 
         <View
             android:layout_width="0.9dp"
             android:layout_height="30.7dp"
-            android:background="#f5f5f5"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:background="#f5f5f5" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/search_grey"
-            android:layout_marginLeft="8dp"/>
 
         <EditText
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:text="Restaurants"
-            android:textSize="14.4sp"
+            android:id="@+id/editTextSearch"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="8.7dp"
-            android:textColor="#4a4a4a"/>
+            android:text="search here"
+            android:textColor="#4a4a4a"
+            android:textSize="14.4sp" />
 
         <View
             android:layout_width="0.9dp"
             android:layout_height="30.7dp"
-            android:background="#f5f5f5"
-            android:layout_marginLeft="70dp"/>
+            android:layout_marginLeft="10dp"
+            android:background="#f5f5f5" />
 
+        <ImageButton
+            android:id="@+id/imgSearch"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bkgd_transparent1"
+
+            android:src="@drawable/ic_search_black_24dp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+
+       >
         <ImageView
             android:layout_width="17dp"
             android:layout_height="17dp"
             android:src="@drawable/ic_pin"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginTop="2dp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Italia"
-            android:layout_marginLeft="5dp"
-            android:textSize="14.4sp"
-            android:textColor="#4a4a4a"/>
+            android:layout_marginLeft="3dp"
+            android:textSize="16sp"
+            android:textColor="#080808"/>
     </LinearLayout>
 </LinearLayout>

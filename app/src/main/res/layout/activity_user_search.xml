@@ -22,7 +22,7 @@
             app:tabTextColor="#f09f9f"
             app:tabSelectedTextColor="@android:color/white"
             app:tabIndicatorColor="@android:color/white"
-            android:background="#d22532"
+            android:background="#f4a004"
             android:id="@+id/tablayout1">
 
         </android.support.design.widget.TabLayout>

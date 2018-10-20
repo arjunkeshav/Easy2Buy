@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.arjun.easy2buy.admin.AdminDashboardActivity;
 import com.example.arjun.easy2buy.user.UserDashboardActivity;
 
+import com.example.arjun.easy2buy.user.UserHomeActivity;
 import com.example.arjun.easy2buy.vendor.VendorDashboardActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +34,8 @@ public class SignIn {
     private FirebaseAuth mAuth;
     private Context context;
     private String typename;
+    private String uid;
+
 
 
 
@@ -61,6 +64,7 @@ public class SignIn {
                             // Sign in success, update UI with the signed-in user's information
                            // Log.d("signup", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            uid =user.getUid();
 
                            // userId = user.getUid();
                             mDialog.dismiss();
@@ -103,8 +107,9 @@ public class SignIn {
                     switch (typename) {
                         case "user": {
 
-                            Intent intent = new Intent(context, UserDashboardActivity.class);
+                            Intent intent = new Intent(context, UserHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("uid", uid);
                             context.startActivity(intent);
                             mainActivity.finish();
 
@@ -115,6 +120,7 @@ public class SignIn {
                         case "admin": {
                             Intent intent = new Intent(context, AdminDashboardActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("uid", uid);
                             context.startActivity(intent);
                             mainActivity .finish();
                             break;
@@ -122,6 +128,7 @@ public class SignIn {
                         case "vendor": {
                             Intent intent = new Intent(context, VendorDashboardActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("uid", uid);
                             context.startActivity(intent);
                             mainActivity.finish();
                             break;

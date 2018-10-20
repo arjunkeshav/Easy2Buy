@@ -44,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     FirebaseUser user = mAuth.getCurrentUser();
                     assert user != null;
-                    String userId= user.getUid();
+                    final String userId= user.getUid();
                     DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("user");
                     mRef.child(userId).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -63,6 +63,7 @@ public class SplashActivity extends AppCompatActivity {
                             switch (typename) {
                                 case "user": {
                                     Intent intent = new Intent(SplashActivity.this, UserDashboardActivity.class);
+                                    intent.putExtra("uid", userId);
                                     startActivity(intent);
                                     finish();
 
@@ -70,6 +71,7 @@ public class SplashActivity extends AppCompatActivity {
                                 }
                                 case "admin": {
                                     Intent intent = new Intent(SplashActivity.this, AdminDashboardActivity.class);
+                                    intent.putExtra("uid", userId);
                                     startActivity(intent);
                                     finish();
                                     break;
@@ -77,6 +79,7 @@ public class SplashActivity extends AppCompatActivity {
                                 }
                                 case "vendor": {
                                     Intent intent = new Intent(SplashActivity.this, VendorDashboardActivity.class);
+                                    intent.putExtra("uid", userId);
                                     startActivity(intent);
                                     finish();
                                     break;
@@ -94,6 +97,7 @@ public class SplashActivity extends AppCompatActivity {
             else {
                     Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }

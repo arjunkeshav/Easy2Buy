@@ -27,6 +27,7 @@ public class SignUp {
     private FirebaseAuth mAuth;
     private Context context;
     private String userType;
+    private String uid;
     SignUp(SignUpActivity signUpActivity, String userType) {
         this.mAuth = FirebaseAuth.getInstance();
         this.context = signUpActivity;
@@ -36,7 +37,7 @@ public class SignUp {
 
 
 
-    public void createUser_fdb(final String email, final String password, final SignUpActivity signUpActivity) {
+    public void createUser_fdb(final String username,final String email, final String password, final SignUpActivity signUpActivity) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(signUpActivity, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -45,8 +46,10 @@ public class SignUp {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("SignUp", "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        uid= user.getUid();
 
-                        addUser(user,email,password,userType);
+
+                        addUser(user,username,email,password,userType);
                         switchUser(userType,signUpActivity);
                         updateUi(user);
                     } else {
@@ -63,17 +66,17 @@ public class SignUp {
 
     private void updateUi(FirebaseUser user) {
         if (user != null) {
-            try{
-            // Name, email address, and profile photo Url
-            String email = user.getEmail();
-            String token= String.valueOf(user.getIdToken(true));
-            String name = user.getDisplayName();
-            Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
-                Log.d("User","email  " +email+   " id: "+uid + "token : "+token);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+//            try{
+//            // Name, email address, and profile photo Url
+//            String email = user.getEmail();
+//            String token= String.valueOf(user.getIdToken(true));
+//            String name = user.getDisplayName();
+//            Uri photoUrl = user.getPhotoUrl();
+//            String uid = user.getUid();
+//                Log.d("User","email  " +email+   " id: "+uid + "token : "+token);
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
 
 
             // Check if user's email is verified
@@ -92,6 +95,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
         case "vendor": {
             Intent intent = new Intent(context, VendorDashboardActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("uid", uid);
             context.startActivity(intent);
             signUpActivity.finish();
 
@@ -100,6 +104,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
         case "user": {
             Intent intent = new Intent(context, UserDashboardActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("uid", uid);
             context.startActivity(intent);
             signUpActivity.finish();
             break;
@@ -107,7 +112,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
     }
 }
 
-    private void addUser(FirebaseUser user,String email,String password,String userType){
+    private void addUser(FirebaseUser user,String username,String email,String password,String userType){
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("user");
 
 // Creating new user node, which returns the unique key value
@@ -118,7 +123,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
 
 
 // creating user object
-       User dbuser = new User(email,password,userId,userType);
+       User dbuser = new User(username,email,password,userId,userType);
 
 // pushing user to 'users' node using the userId
         mRef.child(Objects.requireNonNull(userId)).setValue(dbuser);

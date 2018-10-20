@@ -1,13 +1,22 @@
 package model;
 
 public class User {
-    private String email,password,userId,userType;
+    private String username,email,password,userId,userType;
 
-    public User(String email, String password, String userId, String userType) {
+    public User(String username,String email, String password, String userId, String userType) {
+        this.username=username;
         this.email = email;
         this.password = password;
         this.userId = userId;
         this.userType = userType;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

@@ -35,6 +35,7 @@ import java.util.Objects;
 public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private EditText mEmailView;
+    private EditText mUsernameView;
     private EditText mPasswordView;
     private CheckBox checkBoxRememberMe;
     FirebaseAuth firebaseAuth;
@@ -42,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
     String userType;
     private static final boolean varified = true;
     private static final boolean notvarified = false;
+    private Spinner spinner;
 
 
     @Override
@@ -51,13 +53,14 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_signup);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        Spinner spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
 
         // Spinner click listener
-        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
+        categories.add("select type");
         categories.add("vendor");
         categories.add("user");
 
@@ -69,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-
+        mUsernameView= findViewById(R.id.editTextUsername);
         mEmailView = findViewById(R.id.editTextEmail);
         mPasswordView = findViewById(R.id.editTextPassword);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -121,7 +124,7 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         firebaseAuth.fetchSignInMethodsForEmail(mEmailView.getText().toString()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
             @Override
             public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                boolean check = !Objects.requireNonNull(task.getResult().getSignInMethods()).isEmpty();
+                boolean check = !Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getSignInMethods()).isEmpty();
 
                 if(!check){
                     //return true that email is not found
@@ -165,50 +168,56 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+
         // Store values at the time of the login attempt.
+        String username = mUsernameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password))
-        {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email))
-        {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        }
-        else if (!isEmailValid(email))
-        {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-        if (cancel)
-        {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        }
-        else
-            {
-             // save data in local shared preferences
-             if (checkBoxRememberMe.isChecked()) {
-                 new PrefManager(this).saveLoginDetails(email, password);
-             }
-
-                 saveLoginDetails(email, password);
+        if ( userType == "select type"){
+            Toast.makeText(this,"please select a type",Toast.LENGTH_SHORT).show();
 
 
+    }
+    else {
+            // Check for a valid password, if the user entered one.
+            if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+                mPasswordView.setError(getString(R.string.error_invalid_password));
+                focusView = mPasswordView;
+                cancel = true;
+            }
+            if (TextUtils.isEmpty(username)) {
+                mEmailView.setError(getString(R.string.error_field_required));
+                focusView = mEmailView;
+                cancel = true;
+            }
+            // Check for a valid email address.
+            if (TextUtils.isEmpty(email)) {
+                mEmailView.setError(getString(R.string.error_field_required));
+                focusView = mEmailView;
+                cancel = true;
+            } else if (!isEmailValid(email)) {
+                mEmailView.setError(getString(R.string.error_invalid_email));
+                focusView = mEmailView;
+                cancel = true;
+            }
+            if (cancel) {
+                // There was an error; don't attempt login and focus the first
+                // form field with an error.
+                focusView.requestFocus();
+            } else {
+                // save data in local shared preferences
+                if (checkBoxRememberMe.isChecked()) {
+                    new PrefManager(this).saveLoginDetails(email, password);
+                }
 
-           }
+                saveLoginDetails(username, email, password);
+
+
+            }
+        }
     }
 
     @Override
@@ -228,10 +237,10 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-    private void saveLoginDetails(String email, String password)
+    private void saveLoginDetails(String username,String email, String password)
     {    try
     {
-        new SignUp(SignUpActivity.this,userType).createUser_fdb(email,password,SignUpActivity.this);
+        new SignUp(SignUpActivity.this,userType).createUser_fdb(username,email,password,SignUpActivity.this);
     }
     catch (Exception e){
         e.printStackTrace();

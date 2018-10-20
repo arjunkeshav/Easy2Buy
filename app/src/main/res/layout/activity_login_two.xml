@@ -8,7 +8,7 @@
     android:paddingLeft="18dp"
     android:paddingRight="18dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/new_login_gradients">
+    android:background="@drawable/bg2">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,12 +20,12 @@
 
             <ImageView
                 android:layout_width="250dp"
-                android:layout_height="200dp"
+                android:layout_height="210dp"
                 android:layout_gravity="center_horizontal"
                 android:padding="16dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="16dp"
-                android:src="@drawable/ic_local_shipping_black_24dp"/>
+                android:src="@drawable/easy2buypng"/>
 
 
             <EditText
@@ -37,14 +37,14 @@
                 android:background="@android:color/transparent"
                 android:padding="16dp"
                 android:drawablePadding="12dp"
-                android:hint="Username"
-                android:textColorHint="#fff"
-                android:drawableLeft="@drawable/ic_person_white_24dp"/>
+                android:hint="Email"
+                android:textColorHint="#807272"
+                android:drawableLeft="@drawable/mail"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#f9d7db" />
+                android:background="#a312d7" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -55,16 +55,16 @@
                 android:drawablePadding="16dp"
                 android:padding="16dp"
                 android:hint="Password"
-                android:textColorHint="#fff"
+                android:textColorHint="#807272"
                 android:background="@android:color/transparent"
                 android:maxLines="1"
                 android:layout_marginTop="4dp"
-                android:drawableLeft="@drawable/ic_lock_white_24dp"/>
+                android:drawableLeft="@drawable/lock"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#f9d7db" />
+                android:background="#a312d7" />
 
             <CheckBox
                 android:id="@+id/checkBoxRememberMe"
@@ -81,13 +81,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="#8f09f701"
+                android:background="#8f09a604"
                 android:clickable="true"
                 android:padding="16dp"
                 android:text="LOGIN"
                 android:textAllCaps="false"
-                android:textColor="#9ff16f"
-                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
                 android:textStyle="normal" />
 
 
