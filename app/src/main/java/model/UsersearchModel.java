@@ -6,23 +6,32 @@ package model;
 
 public class UsersearchModel {
 
-    private int nearbyimg1,nearbyimg2;
-    private String nearbytext1,nearbytext2,nearbytext3;
+    private int nearbyimg2;
+    private String  nearbyimg1,nearbytext1,nearbytext2,nearbytext3,nearbytext4;
 
 
-    public UsersearchModel(int nearbyimg1, int nearbyimg2, String nearbytext1, String nearbytext2, String nearbytext3) {
+    public UsersearchModel(String nearbyimg1, int nearbyimg2, String nearbytext1, String nearbytext2, String nearbytext3, String nearbytext4) {
         this.nearbyimg1 = nearbyimg1;
         this.nearbyimg2 = nearbyimg2;
         this.nearbytext1 = nearbytext1;
         this.nearbytext2 = nearbytext2;
         this.nearbytext3 = nearbytext3;
+        this.nearbytext4 = nearbytext4;
     }
 
-    public int getNearbyimg1() {
+    public String getNearbytext4() {
+        return nearbytext4;
+    }
+
+    public void setNearbytext4(String nearbytext4) {
+        this.nearbytext4 = nearbytext4;
+    }
+
+    public String getNearbyimg1() {
         return nearbyimg1;
     }
 
-    public void setNearbyimg1(int nearbyimg1) {
+    public void setNearbyimg1(String nearbyimg1) {
         this.nearbyimg1 = nearbyimg1;
     }
 

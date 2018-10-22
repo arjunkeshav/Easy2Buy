@@ -1,5 +1,6 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,14 +23,34 @@ import model.UsersearchModel;
  * Created by wolfsoft3 on 24/7/18.
  */
 
+@SuppressLint("ValidFragment")
 public class Nearby extends Fragment {
 
-    Integer[] nearbyimg1 = {R.drawable.foodimg4,R.drawable.img2,R.drawable.foodimg3,R.drawable.img1};
-    Integer[] nearbyimg2 = {R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like};
 
-    String[] nearbytext1 = {"Cocobolo Poolside \nBar + Grill","Wild Honey at Scotts Square","Palm Beach Seafood Restaurant","Shin Minori Japanese Restaurant"};
-    String[] nearbytext2 = {"60 Kub Pines Apt. 797","473 Keeling Station","55 Dicki Point Suite 867","833 Kuhn Mission Suite 860"};
-    String[] nearbytext3 = {"238 reviews","238 reviews","238 reviews","238 reviews"};
+    //Integer[] nearbyimg1 = {R.drawable.foodimg4,R.drawable.img2,R.drawable.foodimg3,R.drawable.img1};
+    Integer[] nearbyimg2 = {R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like};
+    ArrayList<String> productUri = new ArrayList<>();
+    ArrayList<String> productName = new ArrayList<>();
+    ArrayList<String> productPrice = new ArrayList<>();
+    ArrayList<String> productDist = new ArrayList<>();
+    ArrayList<String> productVendor = new ArrayList<>();
+
+    public Nearby() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public Nearby(ArrayList<String> productUri,ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor) {
+        this.productUri =productUri;
+        this.productName = productName;
+        this.productPrice=productPrice;
+        this.productDist=productDist;
+        this.productVendor =productVendor;
+
+    }
+
+    //String[] nearbytext1 = {"Cocobolo Poolside \nBar + Grill","Wild Honey at Scotts Square","Palm Beach Seafood Restaurant","Shin Minori Japanese Restaurant"};
+   // String[] nearbytext2 = {"60 Kub Pines Apt. 797","473 Keeling Station","55 Dicki Point Suite 867","833 Kuhn Mission Suite 860"};
+   // String[] nearbytext3 = {"238 reviews","238 reviews","238 reviews","238 reviews"};
 
 
     private UsersearchAdapter usersearchAdapter;
@@ -49,8 +70,8 @@ public class Nearby extends Fragment {
         usersearchModelList = new ArrayList<>();
 
 
-        for (int i = 0; i < nearbyimg1.length; i++) {
-            UsersearchModel view1 = new UsersearchModel(nearbyimg1[i],nearbyimg2[i],nearbytext1[i],nearbytext2[i],nearbytext3[i]);
+        for (int i = 0; i < productName.size(); i++) {
+            UsersearchModel view1 = new UsersearchModel(productUri.get(i),nearbyimg2[i],productName.get(i),productPrice.get(i),productDist.get(i),productVendor.get(i));
             usersearchModelList.add(view1);
         }
         usersearchAdapter = new UsersearchAdapter(getActivity(),usersearchModelList);

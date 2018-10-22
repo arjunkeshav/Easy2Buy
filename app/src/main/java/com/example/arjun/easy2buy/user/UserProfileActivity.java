@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.arjun.easy2buy.vendor.AddproductActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,15 +30,18 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
 public class UserProfileActivity extends AppCompatActivity{
     ImageView imageView;
     Button button;
+    String path;
 
     public static final int Gallery_intent=3;
     Uri imageUrl;
+    String userImg;
     UploadTask.TaskSnapshot newImageUri;
     TextView tvSuccess;
     TextView tvComplete;
@@ -48,9 +53,8 @@ public class UserProfileActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        tvSuccess = findViewById(R.id.textViewsuccess);
-        tvComplete = findViewById(R.id.textViewcomplete);
+        setContentView(R.layout.activity_user_profile_demo);
+
 
 
         imageView = findViewById(R.id.imageProfile);
@@ -91,8 +95,12 @@ public class UserProfileActivity extends AppCompatActivity{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Uri u= data.getData();
+            File file= new File(u.getPath());
+            path =file.getName();
 
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference("UserProfile");
+
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference("UserProfile").child(path);
             assert uri != null;
             storageReference.putFile(uri).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -113,6 +121,7 @@ public class UserProfileActivity extends AppCompatActivity{
                                   Task<Uri> img = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
 
                                   tvSuccess.setText(img.toString());
+                                  setImage();
 
 
 
@@ -162,5 +171,20 @@ public class UserProfileActivity extends AppCompatActivity{
 //                            });
 
         }
+    }
+
+    private void setImage() {
+        Log.e("path",path);
+
+        StorageReference storageRefere = FirebaseStorage.getInstance().getReference("Product").child(path);
+
+        storageRefere.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Uri url=uri;
+                userImg=url.toString();
+                Toast.makeText(UserProfileActivity.this,userImg,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

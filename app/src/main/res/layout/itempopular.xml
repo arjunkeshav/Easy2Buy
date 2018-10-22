@@ -40,52 +40,112 @@
                     android:id="@+id/nearbyimg2"/>
             </FrameLayout>
 
-            <TextView
+            <customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/nearbytext1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:text="Wild Honey at Scotts Square"
-                android:textSize="15dp"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="12.5dp"
-                android:id="@+id/nearbytext1" />
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:textAllCaps="true"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="473 Keeling Station"
-                android:layout_marginLeft="12.5dp"
-                android:id="@+id/nearbytext2"/>
+
+                android:text="Product Name"
+
+                android:textColor="#e7a6b10c"
+                android:textSize="14.4sp" />
+            <LinearLayout
+
+                android:layout_height="18dp"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="7dp"
+                android:background="#10ffffff"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="7dp"
+
+                >
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/rupee"
+
+
+                    />
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="47dp"
+                    android:layout_height="18dp"
+                    android:text="Price"
+                    android:textSize="11.5sp"
+                    android:textColor="#ea1f1f"
+                    android:id="@+id/nearbytext2"
+                    android:layout_marginLeft="3dp"
+
+                    />
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent"
+                    android:background="#cc312f2f" />
+
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_directions_bike_black_24dp"
+
+
+                    />
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:id="@+id/nearbytext3"
+                    android:layout_width="47dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="3dp"
+                    android:text="Distance"
+                    android:textColor="#ea1f1f"
+                    android:textSize="11.5sp"
+
+                    />
+            </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="17dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="13.5dp"
-                android:layout_marginLeft="12.5dp"
-                android:layout_marginTop="6.7dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginBottom="11.dp"
+                android:layout_gravity="right">
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="80dp"
+                    android:layout_height="17dp"
+                    android:text="Vendor Name"
+                    android:textSize="11.5sp"
+                    android:textColor="#9b9b9b"
+                    android:id="@+id/nearbytext4"
+                    android:layout_marginLeft="1dp"
+                    />
 
-                <RatingBar
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:stepSize="0.1"
-                    android:progressTint="@android:color/holo_red_dark"
-                    android:layout_height="wrap_content"
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:id="@+id/nearbytext5"
                     android:layout_width="wrap_content"
-                    android:focusable="true"
-                    android:rating="3"/>
-
-                <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="238 reviews"
-                    android:layout_marginLeft="8.6dp"
-                    android:textSize="11.5dp"
-                    android:id="@+id/nearbytext3"/>
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="130dp"
+                    android:text="238"
+                    android:textColor="#9b9b9b"
+                    android:textSize="11.5sp" />
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="reviews"
+                    android:textSize="11.5sp"
+                    android:layout_marginLeft="2.6dp"
 
-
-
-
+                    android:textColor="#9b9b9b"/>
 
             </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import com.example.arjun.easy2buy.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,8 +40,11 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
         holder.nearbytext1.setText(modelfoodrecycler.getNearbytext1());
         holder.nearbytext2.setText(modelfoodrecycler.getNearbytext2());
         holder.nearbytext3.setText(modelfoodrecycler.getNearbytext3());
+        holder.nearbytext4.setText(modelfoodrecycler.getNearbytext4());
+        Picasso.with(context).load(modelfoodrecycler.getNearbyimg1()).into(holder.nearbyimg1);
 
-        holder.nearbyimg1.setImageResource(modelfoodrecycler.getNearbyimg1());
+
+       //holder.nearbyimg1.setImageResource(modelfoodrecycler.getNearbyimg1());
         holder.nearbyimg2.setImageResource(modelfoodrecycler.getNearbyimg2());
 
 
@@ -54,7 +58,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView nearbyimg1,nearbyimg2;
-        TextView nearbytext1,nearbytext2,nearbytext3;
+        TextView nearbytext1,nearbytext2,nearbytext3,nearbytext4;
 
 
         public MyViewHolder(View itemView) {
@@ -65,6 +69,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
             nearbytext1 = itemView.findViewById(R.id.nearbytext1);
             nearbytext2 = itemView.findViewById(R.id.nearbytext2);
             nearbytext3 = itemView.findViewById(R.id.nearbytext3);
+            nearbytext4 = itemView.findViewById(R.id.nearbytext4);
 
         }
     }

@@ -10,14 +10,13 @@ import android.widget.TextView;
 
 
 import com.example.arjun.easy2buy.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import model.UsersearchModel;
 
-/**
- * Created by wolfsoft3 on 16/7/18.
- */
+
 
 public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.MyViewHolder> {
     Context context;
@@ -34,14 +33,17 @@ public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.My
 
     @Override
     public void onBindViewHolder(UsersearchAdapter.MyViewHolder holder, int position) {
-        UsersearchModel modelfoodrecycler = usersearchModelList.get(position);
+        UsersearchModel modelrecycler = usersearchModelList.get(position);
 
-        holder.nearbytext1.setText(modelfoodrecycler.getNearbytext1());
-        holder.nearbytext2.setText(modelfoodrecycler.getNearbytext2());
-        holder.nearbytext3.setText(modelfoodrecycler.getNearbytext3());
+        holder.nearbytext1.setText(modelrecycler.getNearbytext1());
+        holder.nearbytext2.setText(modelrecycler.getNearbytext2());
+        holder.nearbytext3.setText(modelrecycler.getNearbytext3());
+        holder.nearbytext4.setText(modelrecycler.getNearbytext4());
+        //holder.Picasso.with(this).load(modelrecycler.getNearbyimg1()).into(nearbyimg1);
+        Picasso.with(context).load(modelrecycler.getNearbyimg1()).into(holder.nearbyimg1);
 
-        holder.nearbyimg1.setImageResource(modelfoodrecycler.getNearbyimg1());
-        holder.nearbyimg2.setImageResource(modelfoodrecycler.getNearbyimg2());
+        //holder.nearbyimg1.setImageResource(modelrecycler.getNearbyimg1());
+        holder.nearbyimg2.setImageResource(modelrecycler.getNearbyimg2());
 
 
 
@@ -54,7 +56,7 @@ public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView nearbyimg1,nearbyimg2;
-        TextView nearbytext1,nearbytext2,nearbytext3;
+        TextView nearbytext1,nearbytext2,nearbytext3,nearbytext4;
 
 
         public MyViewHolder(View itemView) {
@@ -65,6 +67,7 @@ public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.My
             nearbytext1 = itemView.findViewById(R.id.nearbytext1);
             nearbytext2 = itemView.findViewById(R.id.nearbytext2);
             nearbytext3 = itemView.findViewById(R.id.nearbytext3);
+            nearbytext4 = itemView.findViewById(R.id.nearbytext4);
 
         }
     }
