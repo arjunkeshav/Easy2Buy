@@ -10,14 +10,16 @@
         android:layout_height="235dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:id="@+id/cardItem">
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/layoutItem">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -32,11 +34,15 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/img1"/>
 
-                <ImageView
-                    android:layout_width="17.3dp"
-                    android:layout_height="14.5dp"
-                    android:src="@drawable/ic_like"
-                    android:layout_marginLeft="140dp"
+                <TextView
+                    android:layout_width="50.3dp"
+                    android:layout_height="18.5dp"
+                    android:background="#830303"
+                    android:textColor="#fff"
+                    android:textAlignment="center"
+                    android:text="offer"
+
+                    android:layout_marginLeft="110dp"
                     android:layout_marginTop="6.7dp"
                     android:id="@+id/nearbyimg2" />
 
@@ -99,7 +105,7 @@
                     />
 
                 <customfonts.MyTextView_Roboto_Regular
-                    android:id="@+id/nearbytext3"
+                    android:id="@+id/nearbydist"
                     android:layout_width="47dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="3dp"

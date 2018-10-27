@@ -18,7 +18,21 @@
     <string name="error_invalid_password">invalid password</string>
     <string name="title_activity_admin_dashboard">AdminDashboardActivity</string>
     <string name="title_activity_user_profile_demo">UserProfileDemo</string>
+
+
+
+    <string name="title_activity_user_details__admin_edit">UserDetails_AdminEdit</string>
+    <string name="title_view">ProductViewActivity</string>
+
+
+
+
+
+
     <string name="large_text">
+
+
+
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."

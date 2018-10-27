@@ -20,9 +20,7 @@ import adapter.PopularAdapter;
 
 import model.UsersearchModel;
 
-/**
- * Created by wolfsoft3 on 24/7/18.
- */
+
 
 public class Popular extends Fragment {
 
@@ -34,6 +32,8 @@ public class Popular extends Fragment {
     ArrayList<String> productPrice = new ArrayList<>();
     ArrayList<String> productDist = new ArrayList<>();
     ArrayList<String> productVendor = new ArrayList<>();
+    ArrayList<String> productOffer = new ArrayList<>();
+    ArrayList<String> productId = new ArrayList<>();
 
 
     //tring[] nearbytext1 = {"Cocobolo Poolside Bar + Grill","Wild Honey at Scotts Square","Palm Beach Seafood Restaurant","Shin Minori Japanese Restaurant"};
@@ -44,12 +44,14 @@ public class Popular extends Fragment {
     }
 
     @SuppressLint("ValidFragment")
-    public Popular(ArrayList<String> productUri, ArrayList<String> productName, ArrayList<String> productPrice, ArrayList<String> productDist,ArrayList<String> productVendor) {
+    public Popular(ArrayList<String> productUri, ArrayList<String> productName, ArrayList<String> productPrice, ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId) {
         this.productUri = productUri;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productDist = productDist;
         this.productVendor = productVendor;
+        this.productOffer = productOffer;
+        this.productId = productId;
     }
 
 
@@ -71,7 +73,7 @@ public class Popular extends Fragment {
 
 
             for (int i = 0; i < productName.size(); i++) {
-                UsersearchModel view1 = new UsersearchModel(productUri.get(i),nearbyimg2[i],productName.get(i),productPrice.get(i),productDist.get(i), productVendor.get(i));
+                UsersearchModel view1 = new UsersearchModel(productUri.get(i),productName.get(i),productPrice.get(i),productDist.get(i), productVendor.get(i),productOffer.get(i),productId.get(i));
                 usersearchModelList.add(view1);
             }
         homepageAdapter = new PopularAdapter(getActivity(),usersearchModelList);

@@ -57,7 +57,9 @@
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:textColor="#0a0909"
-                android:layout_height="57dp" />
+                android:layout_height="57dp"
+                android:background="#646464"
+                />
 
             <View
                 android:layout_width="match_parent"

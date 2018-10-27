@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".user.ProductDetailsActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="#f7f1f0f0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                >
+
+                <!--viewpager used-->
+
+
+                <!--<android.support.v4.view.ViewPager-->
+
+                    <!--android:id="@+id/viewpager"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageProduct"/>
+
+
+                <!--circleindicator used-->
+
+                <!--<me.relex.circleindicator.CircleIndicator-->
+                    <!--android:id="@+id/indicator"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="48dp"-->
+                    <!--android:layout_below="@+id/view"-->
+                    <!--android:layout_gravity="bottom"-->
+                    <!--app:ci_drawable="@drawable/ic_circle"-->
+                    <!--app:ci_drawable_unselected="@drawable/ic_circle"-->
+                    <!--app:ci_height="7dp"-->
+                    <!--app:ci_width="7dp" />-->
+
+                <include layout="@layout/product_detail_toolbar" />
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="13.4dp">
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:id="@+id/txtProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cocobolo Poolside Bar + Grill"
+                    android:textColor="#262628"
+                    android:textSize="19.2dp" />
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:id="@+id/txtVendorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="60 Kub Pines Apt. 797"
+                    android:textColor="#9b9b9b"
+                    android:textSize="14.4sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/RatingBar_Id"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:progressTint="#f05421"
+                        android:rating="4" />
+
+                    <customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/Reviews_Id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8.4dp"
+                        android:text="238 reviews"
+                        android:textColor="#9b9b9b"
+                        android:textSize="11.5sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="27dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <customfonts.MyTextView_Roboto_Regular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="OPEN IN"
+                            android:textColor="#c2c4ca"
+                            android:textSize="14.4sp" />
+
+
+                        <customfonts.MyTextView_Roboto_Regular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="10:00 - 23:00"
+                            android:textColor="#4a4a4a"
+                            android:textSize="14.4sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/button_call_radius"
+                        android:gravity="center"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:paddingRight="20dp"
+                        android:paddingLeft="12dp"
+                        android:id="@+id/layoutCaller">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:padding="1dp"
+                            android:src="@drawable/phone" />
+
+                        <customfonts.MyTextView_Roboto_Regular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:padding="1dp"
+                            android:text="Contact"
+                            android:textColor="#4a4a4a"
+                            android:textSize="14.4sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#f5f5f5"
+                android:padding="6dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:paddingTop="15dp">
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PHOTOS"
+                    android:textColor="#c2c4ca"
+                    android:paddingLeft="13.4dp"
+                    android:textSize="14.4sp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/RecyclerView_Food5_Detail_Id"
+                    android:layout_width="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingLeft="13.3dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:layout_marginBottom="15dp"/>
+
+            </LinearLayout>
+
+
+            <customfonts.MyTextView_Roboto_Regular
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESCRIPTIONS"
+                android:layout_marginLeft="15dp"
+                android:textSize="16.7sp"
+                android:textColor="#c1c5c6"/>
+
+
+            <!--Descriptions-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#f5f5f5"
+                android:padding="6dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="13.4dp">
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="View more"
+                android:layout_marginTop="12dp"
+                android:textColor="#c2c4ca"
+                android:textSize="14.4sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:background="#fff"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/review"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="21sp"
+                    android:hint="Add a Review"
+                    android:textColorHint="#fc5e5d5d"
+                    android:background="#fff"
+                    android:ems="10"
+                    android:layout_marginLeft="10dp"
+                     />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_send_black_24dp"
+                    android:id="@+id/post_review"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="#f5f5f5"
+                android:padding="6dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="13.4dp"
+                android:paddingTop="25dp">
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="REVIEWS"
+                    android:textColor="#c2c4ca"
+                    android:textSize="14.4sp" />
+
+                <customfonts.MyTextView_Roboto_Regular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="See all reviews"
+                    android:textColor="#d22532"
+                    android:textSize="14.4sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="38.4dp"
+                    android:layout_height="38.4dp"
+                    android:layout_marginLeft="13.4dp"
+                    android:layout_marginRight="5.4dp"
+                    android:layout_marginTop="17dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person_outline_red_400_24dp"
+                    app:riv_corner_radius="30dip"
+                    app:riv_oval="true" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.4dp"
+                    android:layout_marginTop="12.8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Ellen McLaughlin"
+                            android:textColor="#4a4a4a"
+                            android:textSize="14.4sp" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="2 hours ago"
+                        android:textColor="#9b9b9b"
+                        android:textSize="14.4sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="13.5dp"
+                        android:text="So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon."
+                        android:textColor="#4a4a4a"
+                        android:textSize="14.4sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp"
+                android:paddingTop="12dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="38.4dp"
+                    android:layout_height="38.4dp"
+                    android:layout_marginLeft="13.4dp"
+                    android:layout_marginRight="5.4dp"
+                    android:layout_marginTop="17dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person_outline_red_400_24dp"
+                    app:riv_corner_radius="30dip"
+                    app:riv_oval="true" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15.4dp"
+                    android:layout_marginTop="12.8dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Vincent King"
+                            android:textColor="#4a4a4a"
+                            android:textSize="14.4sp" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="3 hours ago"
+                        android:textColor="#9b9b9b"
+                        android:textSize="14.4sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="13.5dp"
+                        android:text="So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon."
+                        android:textColor="#4a4a4a"
+                        android:textSize="14.4sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+        <customfonts.Button_Roboto_Medium
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#214bf1"
+            android:text="Get Direction"
+            android:textColor="#ffffff"
+            android:textSize="14.4sp" />
+
+    </RelativeLayout>

@@ -49,6 +49,7 @@
             android:background="#00000000" />
 
         <TextView
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:text="Email"
@@ -68,6 +69,7 @@
             android:background="#00000000" />
 
         <TextView
+            android:id="@+id/phoneno"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:text="phone no"
@@ -112,6 +114,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp" />
         </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtLogout"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#e70505"
+                android:text="LogOut"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
 
 
 

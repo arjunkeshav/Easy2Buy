@@ -30,13 +30,18 @@
                 android:scaleType="fitXY"
                 android:id="@+id/nearbyimg1"
                 android:src="@drawable/img1"/>
-                <ImageView
-                    android:layout_width="17.3dp"
-                    android:layout_height="14.5dp"
-                    android:src="@drawable/ic_like"
+                <TextView
+                    android:layout_width="80.3dp"
+                    android:layout_height="21.5dp"
+                    android:background="#800404"
+                    android:text="offer"
+                    android:textColor="#fff"
+                    android:textSize="17dp"
+                    android:textAlignment="center"
+
                     android:layout_gravity="end"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="1dp"
                     android:id="@+id/nearbyimg2"/>
             </FrameLayout>
 
@@ -97,7 +102,7 @@
                     />
 
                 <customfonts.MyTextView_Roboto_Regular
-                    android:id="@+id/nearbytext3"
+                    android:id="@+id/nearbydist"
                     android:layout_width="47dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="3dp"

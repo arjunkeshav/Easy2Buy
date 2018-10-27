@@ -19,32 +19,33 @@ import java.util.ArrayList;
 import adapter.UsersearchAdapter;
 import model.UsersearchModel;
 
-/**
- * Created by wolfsoft3 on 24/7/18.
- */
 
 @SuppressLint("ValidFragment")
 public class Nearby extends Fragment {
 
 
     //Integer[] nearbyimg1 = {R.drawable.foodimg4,R.drawable.img2,R.drawable.foodimg3,R.drawable.img1};
-    Integer[] nearbyimg2 = {R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like};
+    //Integer[] nearbyimg2 = {R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like,R.drawable.ic_like};
     ArrayList<String> productUri = new ArrayList<>();
     ArrayList<String> productName = new ArrayList<>();
     ArrayList<String> productPrice = new ArrayList<>();
     ArrayList<String> productDist = new ArrayList<>();
     ArrayList<String> productVendor = new ArrayList<>();
+    ArrayList<String> productOffer = new ArrayList<>();
+    ArrayList<String> productId = new ArrayList<>();
 
     public Nearby() {
     }
 
     @SuppressLint("ValidFragment")
-    public Nearby(ArrayList<String> productUri,ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor) {
+    public Nearby(ArrayList<String> productUri,ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId) {
         this.productUri =productUri;
         this.productName = productName;
         this.productPrice=productPrice;
         this.productDist=productDist;
         this.productVendor =productVendor;
+        this.productOffer=productOffer;
+        this.productId =productId;
 
     }
 
@@ -71,7 +72,7 @@ public class Nearby extends Fragment {
 
 
         for (int i = 0; i < productName.size(); i++) {
-            UsersearchModel view1 = new UsersearchModel(productUri.get(i),nearbyimg2[i],productName.get(i),productPrice.get(i),productDist.get(i),productVendor.get(i));
+            UsersearchModel view1 = new UsersearchModel(productUri.get(i),productName.get(i),productPrice.get(i),productDist.get(i),productVendor.get(i),productOffer.get(i),productId.get(i));
             usersearchModelList.add(view1);
         }
         usersearchAdapter = new UsersearchAdapter(getActivity(),usersearchModelList);

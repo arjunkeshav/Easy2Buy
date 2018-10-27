@@ -1,22 +1,29 @@
 package model;
 
-/**
- * Created by wolfsoft3 on 17/7/18.
- */
+
 
 public class UsersearchModel {
 
-    private int nearbyimg2;
-    private String  nearbyimg1,nearbytext1,nearbytext2,nearbytext3,nearbytext4;
+
+    private String  nearbyimg1,nearbytext1,nearbytext2,nearbytext3,nearbytext4,nearbyimg2,productId;
 
 
-    public UsersearchModel(String nearbyimg1, int nearbyimg2, String nearbytext1, String nearbytext2, String nearbytext3, String nearbytext4) {
+    public UsersearchModel(String nearbyimg1, String nearbytext1, String nearbytext2, String nearbytext3, String nearbytext4,String nearbyimg2,String productId) {
         this.nearbyimg1 = nearbyimg1;
         this.nearbyimg2 = nearbyimg2;
         this.nearbytext1 = nearbytext1;
         this.nearbytext2 = nearbytext2;
         this.nearbytext3 = nearbytext3;
         this.nearbytext4 = nearbytext4;
+        this.productId = productId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getNearbytext4() {
@@ -35,11 +42,11 @@ public class UsersearchModel {
         this.nearbyimg1 = nearbyimg1;
     }
 
-    public int getNearbyimg2() {
+    public String getNearbyimg2() {
         return nearbyimg2;
     }
 
-    public void setNearbyimg2(int nearbyimg2) {
+    public void setNearbyimg2(String nearbyimg2) {
         this.nearbyimg2 = nearbyimg2;
     }
 

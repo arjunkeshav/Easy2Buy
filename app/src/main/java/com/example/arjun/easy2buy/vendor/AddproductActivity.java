@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,8 +34,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -42,13 +47,14 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import model.AddProduct;
 
 
-public class AddproductActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class AddproductActivity extends AppCompatActivity {
 
 
     private FusedLocationProviderClient client;
@@ -77,6 +83,8 @@ public class AddproductActivity extends AppCompatActivity implements AdapterView
     String productDesc;
     String productImage= null;
     String productOffer;
+    String vender;
+
     String userId;
 
     private static final int Gallery_intent=3;
@@ -91,6 +99,19 @@ public class AddproductActivity extends AppCompatActivity implements AdapterView
         client = LocationServices.getFusedLocationProviderClient(this);
 
         userId = (String) getIntent().getExtras().get("uid");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                vender = (String)dataSnapshot.child("username").getValue();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         editTextProductName = findViewById(R.id.editTextProductname);
         editTextProductPrice= findViewById(R.id.editTextPrice);
@@ -110,24 +131,71 @@ public class AddproductActivity extends AppCompatActivity implements AdapterView
 //Spinner
         spinner = findViewById(R.id.spinner);
 
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(AddproductActivity.this);
 
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<>();
-        categories.add("select type");
-        categories.add("vegetable");
-        categories.add("foods");
-        categories.add("fruits");
+        // Initializing a String Array
+        String[] category = new String[]{
+                "Select an item...",
+                "Fruits",
+                "vegitable",
+                "Foods",
+                "Carrot weed"
+        };
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        final List<String> categoryList = new ArrayList<>(Arrays.asList(category));
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Initializing an ArrayAdapter
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                this,R.layout.spinner_item,categoryList){
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(spinnerArrayAdapter);
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                productCatog = (String) parent.getItemAtPosition(position);
+                // If user change the default selection
+                // First item is disable and it is used for hint
+                if(position > 0){
+                    // Notify the selected item text
+                    Toast.makeText
+                            (getApplicationContext(), "Selected : " + productCatog, Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 //spinner end
 
@@ -195,7 +263,7 @@ public class AddproductActivity extends AppCompatActivity implements AdapterView
 
 
                         // creating user object
-                        AddProduct addProduct = new AddProduct(productName, productCatog, productPrice, productDesc, productImage, productOffer, userId, productLat, productLong);
+                        AddProduct addProduct = new AddProduct(productName, productCatog, productPrice, productDesc, productImage, productOffer, userId, productLat, productLong,vender,id);
 
                         // pushing user to 'users' node using the userId
                         mRef.child(Objects.requireNonNull(id)).setValue(addProduct);
@@ -237,22 +305,22 @@ public class AddproductActivity extends AppCompatActivity implements AdapterView
         }
 
 
-    @Override
-
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-
-        productCatog = parent.getItemAtPosition(position).toString();
-
-
-
-        // Showing selected spinner item
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+//    @Override
+//
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        // On selecting a spinner item
+//
+//        productCatog = parent.getItemAtPosition(position).toString();
+//
+//
+//
+//        // Showing selected spinner item
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

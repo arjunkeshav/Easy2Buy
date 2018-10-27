@@ -1,5 +1,6 @@
 package com.example.arjun.easy2buy.admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,7 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.arjun.easy2buy.PrefManager;
 import com.example.arjun.easy2buy.R;
+import com.example.arjun.easy2buy.login.SignInActivity;
+import com.example.arjun.easy2buy.newadmin.AdminActivity;
+import com.example.arjun.easy2buy.vendor.VendorDashboardActivity;
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class AdminDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,6 +77,12 @@ public class AdminDashboardActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            new PrefManager(AdminDashboardActivity.this).logout();
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signOut();
+            Intent intent = new Intent(AdminDashboardActivity.this,SignInActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 
@@ -84,6 +97,9 @@ public class AdminDashboardActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent i=new Intent(AdminDashboardActivity.this, AdminActivity.class);
+            startActivity(i);
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

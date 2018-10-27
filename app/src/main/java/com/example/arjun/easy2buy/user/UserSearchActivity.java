@@ -41,10 +41,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
+
 public class UserSearchActivity extends AppCompatActivity {
-
-    String itemVendor;
-
 
     ViewPager viewPager1;
     TabLayout tabLayout1;
@@ -74,52 +72,27 @@ public class UserSearchActivity extends AppCompatActivity {
         editTextSearch = findViewById(R.id.editTextSearch);
 
         imgBack = findViewById(R.id.imgBack);
-
         imgSearch = findViewById(R.id.imgSearch);
-
-
         //setting client
-
         client = LocationServices.getFusedLocationProviderClient(this);
-
-
         //onclick
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 editTextSearch.clearFocus();
-
-
-
                 getLoc();
-
-
                 if(latitude == 0 && longitude ==0)
                 {
                     getLoc();
                 }
                 else
                 {
-
-
-
-
                 //creating String array for product name
-
-
-
-
-
-
                 searchedItem = editTextSearch.getText().toString();
                 Toast.makeText(UserSearchActivity.this, "edittext" + searchedItem, Toast.LENGTH_SHORT).show();
-
-
                 //checking in database
-
-
-                final DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
+                    final DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
 
                 mRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -132,9 +105,11 @@ public class UserSearchActivity extends AppCompatActivity {
 //                    }
                         ArrayList<String> productName = new ArrayList<>();
                         ArrayList<String> productPrice = new ArrayList<>();
-                        ArrayList<String> productDist = new ArrayList<>();
+                        final ArrayList<String> productDist = new ArrayList<>();
                         ArrayList<String> productVendor = new ArrayList<>();
                         ArrayList<String> productUri = new ArrayList<>();
+                        ArrayList<String> productOffer = new ArrayList<>();
+                        ArrayList<String> productId = new ArrayList<>();
 
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -159,72 +134,34 @@ public class UserSearchActivity extends AppCompatActivity {
                                 // distance[0] is now the distance between these lat/lons in meters
                                 if (distance[0] > 9.0) {
 //                                    Toast.makeText(UserSearchActivity.this, "product find", Toast.LENGTH_SHORT).show();
-//                                    Toast.makeText(UserSearchActivity.this, "current Latlog :" + latitude + "," + longitude + " " + "product Latlog :" + newLat + "," + newLong, Toast.LENGTH_LONG).show();
-                                    String itemPrice = (String) dataSnapshot.child(uid).child("productPrice").getValue();
+                                  String itemPrice = (String) dataSnapshot.child(uid).child("productPrice").getValue();
                                     int dist= (int)distance[0];
-                                    String itemDist = String.valueOf(dist) ;
+                                    final String itemDist = String.valueOf(dist) ;
                                     String itemUri =(String) dataSnapshot.child(uid).child("productImage").getValue();
-                                    String pathId = (String) dataSnapshot.child(uid).child("vendorId").getValue();
-
+                                    final String itemVendor = (String) dataSnapshot.child(uid).child("vendor").getValue();
+                                    String itemOffer = (String) dataSnapshot.child(uid).child("productOffer").getValue();
+                                    String itemId =uid;
                                     //fetching vendor details
-
-                                    DatabaseReference vendorRef = FirebaseDatabase.getInstance().getReference("user");
-                                    assert pathId != null;
-                                    vendorRef.child(pathId).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                          itemVendor =(String) dataSnapshot.child("username").getValue();
-                                          Toast.makeText(UserSearchActivity.this,"vendor name is"+itemVendor,Toast.LENGTH_SHORT).show();
-
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
-
-
                                     //String itemOwner = (String) dataSnapshot.child(uid).child("productName").getValue();
                                    // int itemReviews = (int) dataSnapshot.child(uid).child("productName").getValue();
-
                                     productName.add(itemName);
                                     productPrice.add(itemPrice);
                                     productDist.add(itemDist);
                                     productUri.add(itemUri);
                                     productVendor.add(itemVendor);
+                                    productOffer.add(itemOffer);
+                                    productId.add(itemId);
 
                                     Toast.makeText(UserSearchActivity.this,"vendor outside"+itemVendor,Toast.LENGTH_SHORT).show();
                                     Toast.makeText(UserSearchActivity.this,"vendor name is"+productVendor,Toast.LENGTH_SHORT).show();
-
-
                                     //select tab
-
-
-
-
-
-
-
-
                                 } else {
                                     Toast.makeText(UserSearchActivity.this, "product not find", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(UserSearchActivity.this, "not match", Toast.LENGTH_SHORT).show();
                             }
-//
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
-                        }
+                    }
                         viewPager1 = findViewById(R.id.viewpager1);
 
                         tabLayout1 = findViewById(R.id.tablayout1);
@@ -234,7 +171,8 @@ public class UserSearchActivity extends AppCompatActivity {
                         //tabLayout1.addTab(tabLayout1.newTab().setText("Top review"));
                         //tabLayout1.addTab(tabLayout1.newTab().setText("Recommended"));
 
-                        adapter = new TabUsersearchAdapter(getSupportFragmentManager(), tabLayout1.getTabCount(),productUri,productName,productPrice,productDist,productVendor);
+                        adapter = new TabUsersearchAdapter(getSupportFragmentManager(), tabLayout1.getTabCount(),productUri,productName,
+                                productPrice,productDist,productVendor,productOffer,productId);
                         viewPager1.setAdapter(adapter);
                         viewPager1.setOffscreenPageLimit(2);
                         viewPager1.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout1));
@@ -257,12 +195,6 @@ public class UserSearchActivity extends AppCompatActivity {
                             }
                         });
 
-
-
-
-
-
-
                     }
 
                     @Override
@@ -270,30 +202,21 @@ public class UserSearchActivity extends AppCompatActivity {
 
                     }
 
-
                 });
 
-
                 }    //if end here
-
 
             }
         });
 
 
-
     }
 
-
     private void getLoc() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
             return;
         }
         client.getLastLocation().addOnSuccessListener(UserSearchActivity.this, new OnSuccessListener<Location>() {

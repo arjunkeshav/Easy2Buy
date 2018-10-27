@@ -45,7 +45,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
 
        //holder.nearbyimg1.setImageResource(modelfoodrecycler.getNearbyimg1());
-        holder.nearbyimg2.setImageResource(modelfoodrecycler.getNearbyimg2());
+        holder.nearbyimg2.setText(modelfoodrecycler.getNearbyimg2());
 
 
 
@@ -57,8 +57,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView nearbyimg1,nearbyimg2;
-        TextView nearbytext1,nearbytext2,nearbytext3,nearbytext4;
+        ImageView nearbyimg1;
+        TextView nearbytext1,nearbytext2,nearbytext3,nearbytext4,nearbyimg2;
 
 
         public MyViewHolder(View itemView) {
@@ -68,7 +68,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
             nearbytext1 = itemView.findViewById(R.id.nearbytext1);
             nearbytext2 = itemView.findViewById(R.id.nearbytext2);
-            nearbytext3 = itemView.findViewById(R.id.nearbytext3);
+            nearbytext3 = itemView.findViewById(R.id.nearbydist);
             nearbytext4 = itemView.findViewById(R.id.nearbytext4);
 
         }

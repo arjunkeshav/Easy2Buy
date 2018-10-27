@@ -13,6 +13,7 @@ import com.example.arjun.easy2buy.R;
 import com.example.arjun.easy2buy.admin.AdminDashboardActivity;
 import com.example.arjun.easy2buy.login.SignInActivity;
 import com.example.arjun.easy2buy.user.UserDashboardActivity;
+import com.example.arjun.easy2buy.user.UserHomeActivity;
 import com.example.arjun.easy2buy.vendor.VendorDashboardActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,8 +63,9 @@ public class SplashActivity extends AppCompatActivity {
                             assert typename != null;
                             switch (typename) {
                                 case "user": {
-                                    Intent intent = new Intent(SplashActivity.this, UserDashboardActivity.class);
+                                    Intent intent = new Intent(SplashActivity.this, UserHomeActivity.class);
                                     intent.putExtra("uid", userId);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();
 
@@ -72,6 +74,7 @@ public class SplashActivity extends AppCompatActivity {
                                 case "admin": {
                                     Intent intent = new Intent(SplashActivity.this, AdminDashboardActivity.class);
                                     intent.putExtra("uid", userId);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();
                                     break;
@@ -80,6 +83,7 @@ public class SplashActivity extends AppCompatActivity {
                                 case "vendor": {
                                     Intent intent = new Intent(SplashActivity.this, VendorDashboardActivity.class);
                                     intent.putExtra("uid", userId);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finish();
                                     break;

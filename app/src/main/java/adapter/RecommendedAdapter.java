@@ -68,7 +68,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
 
             nearbytext1 = itemView.findViewById(R.id.nearbytext1);
             nearbytext2 = itemView.findViewById(R.id.nearbytext2);
-            nearbytext3 = itemView.findViewById(R.id.nearbytext3);
+            nearbytext3 = itemView.findViewById(R.id.nearbydist);
 
         }
     }

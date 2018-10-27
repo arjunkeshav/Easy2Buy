@@ -1,10 +1,10 @@
 package model;
 
 public class AddProduct {
-   private String productName,productCatog,productPrice,ProductDesc,productImage,productOffer,vendorId;
+   private String productName,productCatog,productPrice,ProductDesc,productImage,productOffer,vendorId,vender,productId;
    private double productLat, productLong;
 
-    public AddProduct(String productName, String productCatog, String productPrice, String productDesc, String productImage, String productOffer, String vendorId,double productLat,double productLong) {
+    public AddProduct(String productName, String productCatog, String productPrice, String productDesc, String productImage, String productOffer, String vendorId,double productLat,double productLong,String vender,String productId) {
         this.productName = productName;
         this.productCatog = productCatog;
         this.productPrice = productPrice;
@@ -14,6 +14,24 @@ public class AddProduct {
         this.vendorId = vendorId;
         this.productLat =productLat;
         this.productLong = productLong;
+        this.vender=vender;
+        this.productId=productId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getVender() {
+        return vender;
+    }
+
+    public void setVender(String vender) {
+        this.vender = vender;
     }
 
     public double getProductLat() {

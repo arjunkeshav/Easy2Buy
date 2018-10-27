@@ -42,6 +42,7 @@ public class VendorDashboardActivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 Intent intent = new Intent(VendorDashboardActivity.this,SignInActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         addProduct = findViewById(R.id.addProduct);
