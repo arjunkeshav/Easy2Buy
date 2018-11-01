@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.example.arjun.easy2buy.admin.AdminDashboardActivity;
+import com.example.arjun.easy2buy.newadmin.AdminHomeActivity;
 import com.example.arjun.easy2buy.user.UserDashboardActivity;
 
 import com.example.arjun.easy2buy.user.UserHomeActivity;
@@ -118,7 +119,7 @@ public class SignIn {
                             break;
                         }
                         case "admin": {
-                            Intent intent = new Intent(context, AdminDashboardActivity.class);
+                            Intent intent = new Intent(context, AdminHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.putExtra("uid", uid);
                             context.startActivity(intent);

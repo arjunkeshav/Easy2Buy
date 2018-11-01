@@ -1,6 +1,7 @@
 package com.example.arjun.easy2buy.login;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +11,7 @@ import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,15 +30,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 
-public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+public class SignUpActivity extends AppCompatActivity
 {
     private EditText mEmailView;
     private EditText mUsernameView;
     private EditText mPasswordView;
+    private EditText mPhoneNumber;
     private CheckBox checkBoxRememberMe;
     FirebaseAuth firebaseAuth;
     private static long back_pressed;
@@ -56,24 +60,84 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         spinner = findViewById(R.id.spinner);
 
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+        spinner = findViewById(R.id.spinner);
 
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("select type");
-        categories.add("vendor");
-        categories.add("user");
 
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        // Initializing a String Array
+        String[] category = new String[]{
+                "Select Type...",
+                "user",
+                "vendor"
+        };
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final List<String> categoryList = new ArrayList<>(Arrays.asList(category));
 
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+        // Initializing an ArrayAdapter
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                this,R.layout.spinner_item,categoryList){
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(spinnerArrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               // productCatog = (String) parent.getItemAtPosition(position);
+                userType = parent.getItemAtPosition(position).toString();
+                // If user change the default selection
+                // First item is disable and it is used for hint
+                if(userType == "Vendor"){
+                    mUsernameView.setHint("Enter Shop Name");
+
+                }
+                else {
+                    mUsernameView.setHint("Enter User Name");
+                }
+                if(position > 0){
+                    // Notify the selected item text
+                    Toast.makeText
+                            (getApplicationContext(), "Selected : " + userType, Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         mUsernameView= findViewById(R.id.editTextUsername);
         mEmailView = findViewById(R.id.editTextEmail);
+        mPhoneNumber =findViewById(R.id.editTextPhoneNo);
+
         mPasswordView = findViewById(R.id.editTextPassword);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
@@ -173,6 +237,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
         String username = mUsernameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String phoneNumber = mPhoneNumber.getText().toString();
+
 
         boolean cancel = false;
         View focusView = null;
@@ -213,34 +279,19 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
                     new PrefManager(this).saveLoginDetails(email, password);
                 }
 
-                saveLoginDetails(username, email, password);
+                saveLoginDetails(username, email, password,phoneNumber);
 
 
             }
         }
     }
 
-    @Override
-
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-
-        userType = parent.getItemAtPosition(position).toString();
 
 
-
-        // Showing selected spinner item
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    private void saveLoginDetails(String username,String email, String password)
+    private void saveLoginDetails(String username,String email, String password,String phoneNumber)
     {    try
     {
-        new SignUp(SignUpActivity.this,userType).createUser_fdb(username,email,password,SignUpActivity.this);
+        new SignUp(SignUpActivity.this,userType).createUser_fdb(username,email,password,phoneNumber,SignUpActivity.this);
     }
     catch (Exception e){
         e.printStackTrace();

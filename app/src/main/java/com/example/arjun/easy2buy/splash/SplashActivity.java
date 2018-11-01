@@ -12,6 +12,7 @@ import com.example.arjun.easy2buy.PrefManager;
 import com.example.arjun.easy2buy.R;
 import com.example.arjun.easy2buy.admin.AdminDashboardActivity;
 import com.example.arjun.easy2buy.login.SignInActivity;
+import com.example.arjun.easy2buy.newadmin.AdminHomeActivity;
 import com.example.arjun.easy2buy.user.UserDashboardActivity;
 import com.example.arjun.easy2buy.user.UserHomeActivity;
 import com.example.arjun.easy2buy.vendor.VendorDashboardActivity;
@@ -72,7 +73,7 @@ public class SplashActivity extends AppCompatActivity {
                                     break;
                                 }
                                 case "admin": {
-                                    Intent intent = new Intent(SplashActivity.this, AdminDashboardActivity.class);
+                                    Intent intent = new Intent(SplashActivity.this, AdminHomeActivity.class);
                                     intent.putExtra("uid", userId);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);

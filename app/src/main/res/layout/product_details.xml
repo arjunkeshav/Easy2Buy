@@ -11,7 +11,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="#f7f1f0f0">
 
         <LinearLayout
@@ -22,36 +23,35 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
-                >
+                android:layout_height="270dp">
 
                 <!--viewpager used-->
 
 
                 <!--<android.support.v4.view.ViewPager-->
 
-                    <!--android:id="@+id/viewpager"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content" />-->
+                <!--android:id="@+id/viewpager"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
                 <ImageView
+                    android:id="@+id/imageProduct"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:id="@+id/imageProduct"/>
+                    android:layout_height="260dp"
+                    android:scaleType="fitXY" />
 
 
                 <!--circleindicator used-->
 
                 <!--<me.relex.circleindicator.CircleIndicator-->
-                    <!--android:id="@+id/indicator"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="48dp"-->
-                    <!--android:layout_below="@+id/view"-->
-                    <!--android:layout_gravity="bottom"-->
-                    <!--app:ci_drawable="@drawable/ic_circle"-->
-                    <!--app:ci_drawable_unselected="@drawable/ic_circle"-->
-                    <!--app:ci_height="7dp"-->
-                    <!--app:ci_width="7dp" />-->
+                <!--android:id="@+id/indicator"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_below="@+id/view"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--app:ci_drawable="@drawable/ic_circle"-->
+                <!--app:ci_drawable_unselected="@drawable/ic_circle"-->
+                <!--app:ci_height="7dp"-->
+                <!--app:ci_width="7dp" />-->
 
                 <include layout="@layout/product_detail_toolbar" />
 
@@ -140,17 +140,17 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/layoutCaller"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="15dp"
                         android:background="@drawable/button_call_radius"
                         android:gravity="center"
-                        android:paddingTop="8dp"
                         android:paddingBottom="8dp"
-                        android:paddingRight="20dp"
                         android:paddingLeft="12dp"
-                        android:id="@+id/layoutCaller">
+                        android:paddingRight="20dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -190,31 +190,31 @@
                 <customfonts.MyTextView_Roboto_Regular
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="13.4dp"
                     android:text="PHOTOS"
                     android:textColor="#c2c4ca"
-                    android:paddingLeft="13.4dp"
                     android:textSize="14.4sp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/RecyclerView_Food5_Detail_Id"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
                     android:clipToPadding="false"
                     android:paddingLeft="13.3dp"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:layout_marginBottom="15dp"/>
+                    android:paddingTop="10dp" />
 
             </LinearLayout>
 
 
             <customfonts.MyTextView_Roboto_Regular
-                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DESCRIPTIONS"
                 android:layout_marginLeft="15dp"
-                android:textSize="16.7sp"
-                android:textColor="#c1c5c6"/>
+                android:layout_marginTop="8dp"
+                android:text="DESCRIPTIONS"
+                android:textColor="#c1c5c6"
+                android:textSize="16.7sp" />
 
 
             <!--Descriptions-->
@@ -239,33 +239,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="View more"
                 android:layout_marginTop="12dp"
+                android:text="View more"
                 android:textColor="#c2c4ca"
                 android:textSize="14.4sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 android:background="#fff"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/review"
                     android:layout_width="320dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#000000"
-                    android:textSize="21sp"
-                    android:hint="Add a Review"
-                    android:textColorHint="#fc5e5d5d"
+                    android:layout_marginLeft="10dp"
                     android:background="#fff"
                     android:ems="10"
-                    android:layout_marginLeft="10dp"
-                     />
+                    android:hint="Add a Review"
+                    android:textColor="#000000"
+                    android:textColorHint="#fc5e5d5d"
+                    android:textSize="21sp" />
+
                 <ImageView
+                    android:id="@+id/post_review"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/ic_send_black_24dp"
-                    android:id="@+id/post_review"/>
+                    android:background="@drawable/ic_send_black_24dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -302,133 +303,13 @@
 
             </LinearLayout>
 
-            <LinearLayout
+
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp">
+                android:layout_height="wrap_content"
+                android:id="@+id/recyReview">
 
-                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="38.4dp"
-                    android:layout_height="38.4dp"
-                    android:layout_marginLeft="13.4dp"
-                    android:layout_marginRight="5.4dp"
-                    android:layout_marginTop="17dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person_outline_red_400_24dp"
-                    app:riv_corner_radius="30dip"
-                    app:riv_oval="true" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15.4dp"
-                    android:layout_marginTop="12.8dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Ellen McLaughlin"
-                            android:textColor="#4a4a4a"
-                            android:textSize="14.4sp" />
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="2 hours ago"
-                        android:textColor="#9b9b9b"
-                        android:textSize="14.4sp" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="13.5dp"
-                        android:text="So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon."
-                        android:textColor="#4a4a4a"
-                        android:textSize="14.4sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingBottom="30dp"
-                android:paddingTop="12dp">
-
-                <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="38.4dp"
-                    android:layout_height="38.4dp"
-                    android:layout_marginLeft="13.4dp"
-                    android:layout_marginRight="5.4dp"
-                    android:layout_marginTop="17dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person_outline_red_400_24dp"
-                    app:riv_corner_radius="30dip"
-                    app:riv_oval="true" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15.4dp"
-                    android:layout_marginTop="12.8dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Vincent King"
-                            android:textColor="#4a4a4a"
-                            android:textSize="14.4sp" />
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="3 hours ago"
-                        android:textColor="#9b9b9b"
-                        android:textSize="14.4sp" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="13.5dp"
-                        android:text="So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon."
-                        android:textColor="#4a4a4a"
-                        android:textSize="14.4sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+            </android.support.v7.widget.RecyclerView>
 
 
         </LinearLayout>
@@ -436,6 +317,7 @@
     </ScrollView>
 
         <customfonts.Button_Roboto_Medium
+            android:id="@+id/buttonDirection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

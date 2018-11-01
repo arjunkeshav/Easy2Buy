@@ -1,7 +1,7 @@
 <tabs>
     <tab
         id="@+id/tab_favorites"
-        icon="@drawable/ic_menu"
+        icon="@drawable/ic_home_orange_24dp"
         activeColor="#f15421"
         inActiveColor="#d3d3d3"/>
     <tab

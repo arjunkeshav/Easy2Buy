@@ -87,8 +87,8 @@ public class UserDetails_AdminEdit extends AppCompatActivity {
 
                                 if(usertype.equalsIgnoreCase("vendor"))
                                 {listreview();
-                                    p.setTitle("deleting user accound ");
-                                    p.setMessage("this will delete vendor and products");
+                                    p.setTitle("deleting user account ");
+                                    p.setMessage("this will delete vendor and their products");
                                     p.show();
                                     removeUser();
 
@@ -117,29 +117,7 @@ public class UserDetails_AdminEdit extends AppCompatActivity {
 
     }
 
-    private void addreview(String s) {
 
-
-        DatabaseReference mDatabase;
-// ...
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-      //  Random r = new Random();
-      //  int i1 = r.nextInt(100 - 28) + 28;
-        String reviewId= mDatabase.child("vendorReviews").push().getKey();
-        VenderReview vendor=new VenderReview(s,id,reviewId);
-        mDatabase.child("vendorReviews").child(String.valueOf(reviewId)).setValue(vendor).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(),"Review added ",Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
-    }
 
     private void removeSingleUser() {
 
@@ -266,7 +244,7 @@ public class UserDetails_AdminEdit extends AppCompatActivity {
                             vendor_review_array.add(user);
 
                         }
-                        Log.e("simiventorreview",""+vendor_review_array.size()); //displays the key for the node
+                        Log.e("ventorreview",""+vendor_review_array.size()); //displays the key for the node
                          v=new VendorReviewAdapter(UserDetails_AdminEdit.this,vendor_review_array);
                         ventorreview.setAdapter(v);
 

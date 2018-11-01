@@ -92,7 +92,7 @@
                 android:background="#f9d7db" />
 
             <EditText
-                android:id="@+id/editTextConfirmPassword"
+                android:id="@+id/editTextPhoneNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -100,7 +100,7 @@
                 android:drawableLeft="@drawable/ic_lock_white_24dp"
                 android:drawablePadding="16dp"
                 android:ems="10"
-                android:hint="Confirm Password"
+                android:hint="Phone Number"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="16dp"

@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -249,24 +250,51 @@ public class AddproductActivity extends AppCompatActivity {
                         productDesc = editTextproductDesc.getText().toString();
                         productOffer = editTextProductOffer.getText().toString();
 
+                        if(TextUtils.isEmpty(productName) || TextUtils.isEmpty(productDesc) ||TextUtils.isEmpty(productPrice) || TextUtils.isEmpty(productOffer) ){
+                            Toast.makeText(AddproductActivity.this,"please fill the blank field and then upload ",Toast.LENGTH_SHORT).show();
 
-                        //FirebaseUser user = mAuth.getCurrentUser();
-
-                        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
-
-                        // Creating new user node, which returns the unique key value
-                        // new user node would be /users/$userid/
-                        //String userId = mRef.push().getKey();
-                        // assert user != null;
-                        // String userId = user.getUid();
-                        String id = mRef.push().getKey();
+                        }
+                        else {
 
 
-                        // creating user object
-                        AddProduct addProduct = new AddProduct(productName, productCatog, productPrice, productDesc, productImage, productOffer, userId, productLat, productLong,vender,id);
+                            //FirebaseUser user = mAuth.getCurrentUser();
 
-                        // pushing user to 'users' node using the userId
-                        mRef.child(Objects.requireNonNull(id)).setValue(addProduct);
+                            DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
+
+                            // Creating new user node, which returns the unique key value
+                            // new user node would be /users/$userid/
+                            //String userId = mRef.push().getKey();
+                            // assert user != null;
+                            // String userId = user.getUid();
+                            String id = mRef.push().getKey();
+
+
+                            // creating user object
+                            AddProduct addProduct = new AddProduct(productName, productCatog, productPrice, productDesc, productImage, productOffer, userId, productLat, productLong, vender, id);
+
+                            // pushing user to 'users' node using the userId
+                            mRef.child(Objects.requireNonNull(id)).setValue(addProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(AddproductActivity.this, "uploaded", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AddproductActivity.this,"some Failure",Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+
+                            editTextProductOffer.setText(" ");
+                            editTextproductDesc.setText(" ");
+                            editTextProductName.setText(" ");
+                            editTextProductPrice.setText(" ");
+                        }
+
+
+
                     }
 
                 }

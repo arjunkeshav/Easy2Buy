@@ -92,7 +92,10 @@
                 android:textStyle="normal"
                 />
 
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
 
                 <TextView
@@ -106,6 +109,19 @@
                     android:layout_marginBottom="16dp"
                     android:layout_gravity="center"
                     style="@style/TextAppearance.AppCompat.Body1"/>
+            <TextView
+                android:id="@+id/textViewforgotpsd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="forgot password"
+                android:textColor="#fff"
+                android:padding="16dp"
+                android:clickable="true"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                style="@style/TextAppearance.AppCompat.Body1"/>
+
+</LinearLayout>
 
 
 

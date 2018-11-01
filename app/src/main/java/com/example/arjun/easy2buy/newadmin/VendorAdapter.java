@@ -1,5 +1,6 @@
 package com.example.arjun.easy2buy.newadmin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -15,8 +16,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 class VendorAdapter extends RecyclerView.Adapter <VendorAdapter.Myview> {
-    AdminActivity mainActivity; ArrayList<UserModel> usersArray;
-    public VendorAdapter(AdminActivity mainActivity, ArrayList<UserModel> usersArray) {
+    Activity mainActivity; ArrayList<UserModel> usersArray;
+    public VendorAdapter(Activity mainActivity, ArrayList<UserModel> usersArray) {
         this.mainActivity=mainActivity;
         this.usersArray=usersArray;
     }

@@ -5,6 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
+
 tools:context=".admin.AdminDashboardActivity"
     android:background="#fff"
 tools:showIn="@layout/app_bar_admin_dashboard">
@@ -15,6 +16,7 @@ tools:showIn="@layout/app_bar_admin_dashboard">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,8 +39,9 @@ tools:showIn="@layout/app_bar_admin_dashboard">
                 android:layout_width="40dp"
                 android:layout_height="40dp"
 
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
+                android:id="@+id/logout"
 
                 android:src="@drawable/ic_user"
                  />

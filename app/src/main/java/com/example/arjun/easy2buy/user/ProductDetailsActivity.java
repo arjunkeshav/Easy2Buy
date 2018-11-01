@@ -1,8 +1,12 @@
 package com.example.arjun.easy2buy.user;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +25,9 @@ import android.widget.Toast;
 
 import com.example.arjun.easy2buy.R;
 import com.example.arjun.easy2buy.newadmin.ProductReviewModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +36,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -58,6 +68,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
     EditText review;
     String uid;
     LinearLayout layout;
+    Button buttonDirection;
+    double sourcelat,sourcelong,destinationlat,destinationlong;
+    private FusedLocationProviderClient client;
+    String vendorId;
 
 
 
@@ -71,9 +85,40 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
+
+        client = LocationServices.getFusedLocationProviderClient(this);
+
         imgProduct = findViewById(R.id.imageProduct);
         txtProductName= findViewById(R.id.txtProductName);
         txtVendorName = findViewById(R.id.txtVendorName);
+        buttonDirection = findViewById(R.id.buttonDirection);
+        buttonDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    //10.037171, 76.302251
+                    //9.968451, 76.318988
+                    getLoc();
+                    if(sourcelat==0 && sourcelong==0){
+                        getLoc();
+                    }
+                    else {
+
+
+                        LatLng origin = new LatLng(sourcelat, sourcelong);
+                        LatLng destination = new LatLng(destinationlat, destinationlong);
+                        String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?saddr=%f,%f(%s)&daddr=%f,%f (%s)", origin.latitude, origin.longitude, "me", destination.latitude, destination.longitude, "Destination");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                        intent.setPackage("com.google.android.apps.maps");
+                        startActivity(intent);
+                    }
+
+            }
+        });
+
+
+
+
         post = findViewById(R.id.post_review);
 
         post.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +148,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         uid = getIntent().getStringExtra("uid");
+
         String dist = getIntent().getStringExtra("distance");
 
 
@@ -115,6 +161,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     String itemName = (String)dataSnapshot.child("productName").getValue();
                     String itemPrice = (String)dataSnapshot.child("productPrice").getValue();
                     String itemImage = (String)dataSnapshot.child("productImage").getValue();
+                    destinationlat = (double)dataSnapshot.child("productLat").getValue();
+                    destinationlong = (double)dataSnapshot.child("productLong").getValue();
+                    vendorId = (String)dataSnapshot.child("vendorId").getValue();
+
+
                     Picasso.with(ProductDetailsActivity.this).load(itemImage).into(imgProduct);
                     txtProductName.setText(itemName);
                     txtVendorName.setText(itemPrice);
@@ -128,6 +179,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
+
+//        DatabaseReference vendorRef = FirebaseDatabase.getInstance().getReference("user");
+//        vendorRef.child(vendorId).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
         //        modelArrayList = new ArrayList<>();
@@ -198,4 +262,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    private void getLoc() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            Toast.makeText(ProductDetailsActivity.this,"permission not allowed",Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+        client.getLastLocation().addOnSuccessListener(ProductDetailsActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if(location!=null){
+                    sourcelat = location.getLatitude();
+                    sourcelong = location.getLongitude();
+                }
+
+            }
+        });
+    }
+
 }

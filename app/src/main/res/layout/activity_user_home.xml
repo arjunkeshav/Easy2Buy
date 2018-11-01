@@ -6,6 +6,22 @@
     android:layout_height="wrap_content"
     android:background="@drawable/homebg">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@drawable/bkgd_transparent1"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#006c6c6c"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +43,7 @@
                 app:civ_border_color="#FF000000" />
 
             <customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/txtname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hi"
@@ -64,14 +81,15 @@
                 android:tint="#d0d0d0"/>
 
             <customfonts.EditText_Roboto_Regular
+                android:id="@+id/edittextSearch"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Search for product, shop..."
-                android:textColor="#ffffff"
+                android:textColor="#050505"
                 android:background="#00000000"
                 android:layout_marginLeft="8.7dp"
-                android:textSize="14.4sp"
+                android:textSize="16.4sp"
                 android:textColorHint="#9b9b9b"/>
 
             <ImageView

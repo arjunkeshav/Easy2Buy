@@ -32,7 +32,7 @@ class ProductReviewAdapter extends RecyclerView.Adapter<ProductReviewAdapter.Myv
 
     @Override
     public Myview onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(userDetails_adminEdit).inflate(R.layout.child_ventor_review,parent,false);
+        View v= LayoutInflater.from(userDetails_adminEdit).inflate(R.layout.item_reviews,parent,false);
        Myview m=new Myview(v);
        return  m;
     }

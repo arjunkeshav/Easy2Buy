@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ebebeb"
+            android:background="#a1a19b"
             android:paddingTop="15dp"
             android:paddingBottom="10dp"
             android:gravity="center"
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewpager1"
-            android:background="#605f5f">
+            android:background="#bfbfbf">
 
         </android.support.v4.view.ViewPager>
     </LinearLayout>

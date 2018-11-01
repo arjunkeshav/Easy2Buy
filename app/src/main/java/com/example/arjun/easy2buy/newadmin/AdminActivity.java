@@ -33,9 +33,9 @@ ArrayList<UserModel> usersArray=new ArrayList<UserModel>();
         setContentView(R.layout.activity_admin);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        recyclerView= findViewById(R.id.rec);
+        //recyclerView= findViewById(R.id.rec);
         recyclerView_users= findViewById(R.id.rec_users);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_users.setLayoutManager(new LinearLayoutManager(this));
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +54,9 @@ ArrayList<UserModel> usersArray=new ArrayList<UserModel>();
 //            }
 //        });
         try{
-            vendorArray.clear();
-        recylercall("vendor");
-            Log.e("simireccall",""+vendorArray.size());
+          vendorArray.clear();
+//        recylercall("vendor");
+//            Log.e("simireccall",""+vendorArray.size());
 
         }
        finally {

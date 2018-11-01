@@ -47,7 +47,7 @@ public class ProductViewActivity extends AppCompatActivity {
         price= findViewById(R.id.product_price);
         disc= findViewById(R.id.product_dis);
         review= findViewById(R.id.review);
-        post= findViewById(R.id.post_review);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         shop_review.setLayoutManager(new LinearLayoutManager(ProductViewActivity.this));
 
@@ -80,7 +80,7 @@ public class ProductViewActivity extends AppCompatActivity {
                         .setAction("Delete", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                p.setTitle("deleting user accound ");
+                                p.setTitle("deleting user account ");
                                 p.setMessage("this will delete vendor and products");
                                 p.show();
 
@@ -91,12 +91,7 @@ public class ProductViewActivity extends AppCompatActivity {
         });
 
 
-     post.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-            // addreview();
-         }
-     });
+
 
 
 
@@ -121,7 +116,7 @@ public class ProductViewActivity extends AppCompatActivity {
                             pro_review.add(user);
 
                         }
-                        Log.e("simiventorreview",""+pro_review.size()); //displays the key for the node
+                        Log.e("ventorreview",""+pro_review.size()); //displays the key for the node
                        ProductReviewAdapter v=new ProductReviewAdapter(ProductViewActivity.this,pro_review);
                         shop_review.setAdapter(v);
 

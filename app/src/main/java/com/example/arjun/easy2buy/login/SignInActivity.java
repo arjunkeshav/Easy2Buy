@@ -39,6 +39,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
     private EditText mPasswordView;
     private CheckBox checkBoxRememberMe;
 
+
     private FirebaseAuth mAuth;
     private ProgressDialog mDialog;
     private Bundle basket;
@@ -96,6 +97,17 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
 
                 Intent intent = new Intent(SignInActivity.this,SignUpActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        TextView textViewforgotpsd = findViewById(R.id.textViewforgotpsd);
+        textViewforgotpsd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(SignInActivity.this,ForgotpsdActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -221,6 +233,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         try
             {
                new SignIn(SignInActivity.this).check_user(email,password,SignInActivity.this);
+               mDialog.dismiss();
             }
     catch (Exception e)
     {

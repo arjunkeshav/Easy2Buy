@@ -56,7 +56,7 @@ public class UserProfileActivity extends AppCompatActivity{
     UploadTask.TaskSnapshot newImageUri;
     TextView tvSuccess;
     TextView tvComplete;
-    TextView logOut;
+    ImageView logOut;
     ImageView dp;
     ImageButton imgcamera;
     String userid;
@@ -81,7 +81,7 @@ public class UserProfileActivity extends AppCompatActivity{
 
         userid = getIntent().getStringExtra("uid");
 
-        logOut = findViewById(R.id.txtLogout);
+        logOut = findViewById(R.id.imglogout);
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -12,6 +12,7 @@ import model.User;
 
 
 import com.example.arjun.easy2buy.user.UserDashboardActivity;
+import com.example.arjun.easy2buy.user.UserHomeActivity;
 import com.example.arjun.easy2buy.vendor.VendorDashboardActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -37,7 +38,7 @@ public class SignUp {
 
 
 
-    public void createUser_fdb(final String username,final String email, final String password, final SignUpActivity signUpActivity) {
+    public void createUser_fdb(final String username, final String email, final String password, final String phoneNumber, final SignUpActivity signUpActivity) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(signUpActivity, new OnCompleteListener<AuthResult>() {
                 @Override
@@ -49,7 +50,7 @@ public class SignUp {
                         uid= user.getUid();
 
 
-                        addUser(user,username,email,password,userType);
+                        addUser(user,username,email,password,userType,phoneNumber);
                         switchUser(userType,signUpActivity);
                         updateUi(user);
                     } else {
@@ -102,7 +103,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
             break;
         }
         case "user": {
-            Intent intent = new Intent(context, UserDashboardActivity.class);
+            Intent intent = new Intent(context, UserHomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra("uid", uid);
             context.startActivity(intent);
@@ -112,7 +113,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
     }
 }
 
-    private void addUser(FirebaseUser user,String username,String email,String password,String userType){
+    private void addUser(FirebaseUser user,String username,String email,String password,String userType,String phoneNumber){
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("user");
 
 // Creating new user node, which returns the unique key value
@@ -123,7 +124,7 @@ private void switchUser(String userType,SignUpActivity signUpActivity){
 
 
 // creating user object
-       User dbuser = new User(username,email,password,userId,userType);
+       User dbuser = new User(username,email,password,userId,userType,phoneNumber);
 
 // pushing user to 'users' node using the userId
         mRef.child(Objects.requireNonNull(userId)).setValue(dbuser);

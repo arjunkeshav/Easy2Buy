@@ -52,10 +52,15 @@
             android:name=".user.UserDashboardActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
+        <activity android:name=".vendor.VendorProfileActivity"/>
+        <activity android:name=".newadmin.AdminProfile"/>
         <activity
             android:name=".admin.AdminDashboardActivity"
             android:label="@string/title_activity_admin_dashboard"
             android:theme="@style/AppTheme" />
+        <activity android:name=".newadmin.AdminHomeActivity"/>
+        <activity android:name=".newadmin.VendorViewActivity"/>
+        <activity android:name=".login.ForgotpsdActivity"/>
         <activity
             android:name=".vendor.VendorDashboardActivity"
             android:label="VendorDashboard"
@@ -67,6 +72,7 @@
             android:label="@string/title_activity_user_profile_demo"
             android:theme="@style/AppTheme" />
         <activity android:name=".vendor.AddproductActivity"></activity>
+        <activity android:name=".vendor.UpdateProduct"/>
 
         <activity
             android:name=".newadmin.AdminActivity"
