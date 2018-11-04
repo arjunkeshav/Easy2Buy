@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <application
         android:name=".Contxt_chek"
         android:allowBackup="true"
@@ -89,7 +89,15 @@
             android:theme="@style/AppTheme.NoActionBar" >
 
         </activity>
-
+        <service android:name=".update.notify.FirebaseMessage">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+        <activity android:name=".update.Notify"/>
     </application>
 
 </manifest>

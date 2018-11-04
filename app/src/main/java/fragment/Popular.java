@@ -34,6 +34,8 @@ public class Popular extends Fragment {
     ArrayList<String> productVendor = new ArrayList<>();
     ArrayList<String> productOffer = new ArrayList<>();
     ArrayList<String> productId = new ArrayList<>();
+    String userid;
+
 
 
     //tring[] nearbytext1 = {"Cocobolo Poolside Bar + Grill","Wild Honey at Scotts Square","Palm Beach Seafood Restaurant","Shin Minori Japanese Restaurant"};
@@ -44,7 +46,7 @@ public class Popular extends Fragment {
     }
 
     @SuppressLint("ValidFragment")
-    public Popular(ArrayList<String> productUri, ArrayList<String> productName, ArrayList<String> productPrice, ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId) {
+    public Popular(ArrayList<String> productUri, ArrayList<String> productName, ArrayList<String> productPrice, ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId,String userid) {
         this.productUri = productUri;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -52,6 +54,7 @@ public class Popular extends Fragment {
         this.productVendor = productVendor;
         this.productOffer = productOffer;
         this.productId = productId;
+        this.userid = userid;
     }
 
 
@@ -76,7 +79,7 @@ public class Popular extends Fragment {
                 UsersearchModel view1 = new UsersearchModel(productUri.get(i),productName.get(i),productPrice.get(i),productDist.get(i), productVendor.get(i),productOffer.get(i),productId.get(i));
                 usersearchModelList.add(view1);
             }
-        homepageAdapter = new PopularAdapter(getActivity(),usersearchModelList);
+        homepageAdapter = new PopularAdapter(getActivity(),usersearchModelList,userid);
         recyclerview.setAdapter(homepageAdapter);
 
         return view;

@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import model.UsersearchModel;
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHolder> {
     Context context;
     private List<UsersearchModel> usersearchModelList;
+    String userid;
 
 
     @Override
@@ -59,12 +61,14 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView nearbyimg1;
         TextView nearbytext1,nearbytext2,nearbytext3,nearbytext4,nearbyimg2;
+        CardView cardView;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
             nearbyimg1 = itemView.findViewById(R.id.nearbyimg1);
             nearbyimg2 = itemView.findViewById(R.id.nearbyimg2);
+            cardView =  itemView.findViewById(R.id.cardItem);
 
             nearbytext1 = itemView.findViewById(R.id.nearbytext1);
             nearbytext2 = itemView.findViewById(R.id.nearbytext2);
@@ -73,8 +77,10 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.MyViewHo
 
         }
     }
-    public PopularAdapter(Context mainActivityContacts, List<UsersearchModel> offerList) {
+    public PopularAdapter(Context mainActivityContacts, List<UsersearchModel> offerList,String userid) {
         this.usersearchModelList = offerList;
         this.context = mainActivityContacts;
+        this.userid = userid;
+
     }
 }

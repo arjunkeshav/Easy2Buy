@@ -316,7 +316,7 @@ public class ForgotpsdActivity extends AppCompatActivity implements LoaderCallba
             FirebaseAuth auth = FirebaseAuth.getInstance();
             String emailAddress = "user@example.com";
 
-            auth.sendPasswordResetEmail(emailAddress)
+            auth.sendPasswordResetEmail(mEmail)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

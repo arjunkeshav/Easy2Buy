@@ -18,6 +18,8 @@
     <string name="error_invalid_password">invalid password</string>
     <string name="title_activity_admin_dashboard">AdminDashboardActivity</string>
     <string name="title_activity_user_profile_demo">UserProfileDemo</string>
+    <string name="title_activity_notify">Notify</string>
+    <string name="default_notification_channel_id">com.fisat.nyzam.zigma</string>
 
 
 

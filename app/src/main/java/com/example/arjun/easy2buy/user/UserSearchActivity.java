@@ -58,6 +58,7 @@ public class UserSearchActivity extends AppCompatActivity {
     EditText editTextSearch;
     ImageView imgSearch;
     ImageView imgBack;
+    String userid;
     double  latitude,longitude;
     public static final int REQUEST_LOCATION_CODE = 99;
 
@@ -82,6 +83,7 @@ public class UserSearchActivity extends AppCompatActivity {
 
 
         String text = getIntent().getStringExtra("text");
+        userid = getIntent().getStringExtra("uid");
         Bundle b = getIntent().getExtras();
          latitude = b.getDouble("latitude");
         longitude = b.getDouble("longitude");
@@ -128,7 +130,7 @@ public class UserSearchActivity extends AppCompatActivity {
 
         //creating String array for product name
         searchedItem = s;
-        Toast.makeText(UserSearchActivity.this, "edittext" + searchedItem, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(UserSearchActivity.this, "edittext" + searchedItem, Toast.LENGTH_SHORT).show();
         //checking in database
         final DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
 
@@ -167,19 +169,20 @@ public class UserSearchActivity extends AppCompatActivity {
                         double newLong = (double) dataSnapshot.child(uid).child("productLong").getValue();
 
                         float[] distance = new float[1];
-                        Toast.makeText(UserSearchActivity.this,newLat+"  "+newLong+" curent location"+longitude+" "+longitude, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(UserSearchActivity.this,newLat+"  "+newLong+" curent location"+longitude+" "+longitude, Toast.LENGTH_SHORT).show();
 
                         Location.distanceBetween(newLat, newLong, latitude, longitude, distance);
-                        Toast.makeText(UserSearchActivity.this, "Distance is " + distance[0], Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(UserSearchActivity.this, "Distance is " + distance[0], Toast.LENGTH_SHORT).show();
                         // distance[0] is now the distance between these lat/lons in meters
-                        if (distance[0] > 60.0) {
+                        if (distance[0] > 0.0) {
 //                                    Toast.makeText(UserSearchActivity.this, "product find", Toast.LENGTH_SHORT).show();
                             String itemPrice = (String) dataSnapshot.child(uid).child("productPrice").getValue();
                             int dist= (int)distance[0];
                             final String itemDist = String.valueOf(dist) ;
                             String itemUri =(String) dataSnapshot.child(uid).child("productImage").getValue();
                             final String itemVendor = (String) dataSnapshot.child(uid).child("vendor").getValue();
-                            String itemOffer = (String) dataSnapshot.child(uid).child("productOffer").getValue();
+                            String itemOffe = (String) dataSnapshot.child(uid).child("productOffer").getValue();
+                            String itemOffer= itemOffe+"% off";
                             String itemId =uid;
                             //fetching vendor details
                             //String itemOwner = (String) dataSnapshot.child(uid).child("productName").getValue();
@@ -196,10 +199,10 @@ public class UserSearchActivity extends AppCompatActivity {
                           //  Toast.makeText(UserSearchActivity.this,"vendor name is"+productVendor,Toast.LENGTH_SHORT).show();
                             //select tab
                         } else {
-                            Toast.makeText(UserSearchActivity.this, "product not find", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(UserSearchActivity.this, "product not find", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(UserSearchActivity.this, "not match", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(UserSearchActivity.this, "not match", Toast.LENGTH_SHORT).show();
                     }
                 }
                 viewPager1 = findViewById(R.id.viewpager1);
@@ -212,7 +215,7 @@ public class UserSearchActivity extends AppCompatActivity {
                 //tabLayout1.addTab(tabLayout1.newTab().setText("Recommended"));
 
                 adapter = new TabUsersearchAdapter(getSupportFragmentManager(), tabLayout1.getTabCount(),productUri,productName,
-                        productPrice,productDist,productVendor,productOffer,productId);
+                        productPrice,productDist,productVendor,productOffer,productId,userid);
                 viewPager1.setAdapter(adapter);
                 viewPager1.setOffscreenPageLimit(1);
                 viewPager1.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout1));

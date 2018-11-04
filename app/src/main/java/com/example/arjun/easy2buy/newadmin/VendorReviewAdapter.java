@@ -85,7 +85,7 @@ class VendorReviewAdapter extends RecyclerView.Adapter<VendorReviewAdapter.Myvie
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                      //  vendor_review_array.remove(position);
+                      //  product_review_array.remove(position);
                        holder.c.setVisibility(View.GONE);
                     }
                 })

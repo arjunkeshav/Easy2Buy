@@ -180,14 +180,7 @@
                     android:textColor="#c2c4ca"
                     android:textSize="14.4sp" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/RecyclerView_Food5_Detail_Id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:clipToPadding="false"
-                    android:paddingLeft="13.3dp"
-                    android:paddingTop="10dp" />
+
 
             </LinearLayout>
 

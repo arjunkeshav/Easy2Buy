@@ -33,12 +33,14 @@ public class Nearby extends Fragment {
     ArrayList<String> productVendor = new ArrayList<>();
     ArrayList<String> productOffer = new ArrayList<>();
     ArrayList<String> productId = new ArrayList<>();
+    String userid;
+
 
     public Nearby() {
     }
 
     @SuppressLint("ValidFragment")
-    public Nearby(ArrayList<String> productUri,ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId) {
+    public Nearby(ArrayList<String> productUri,ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId,String userid) {
         this.productUri =productUri;
         this.productName = productName;
         this.productPrice=productPrice;
@@ -46,6 +48,8 @@ public class Nearby extends Fragment {
         this.productVendor =productVendor;
         this.productOffer=productOffer;
         this.productId =productId;
+        this.userid = userid;
+
 
     }
 
@@ -75,7 +79,7 @@ public class Nearby extends Fragment {
             UsersearchModel view1 = new UsersearchModel(productUri.get(i),productName.get(i),productPrice.get(i),productDist.get(i),productVendor.get(i),productOffer.get(i),productId.get(i));
             usersearchModelList.add(view1);
         }
-        usersearchAdapter = new UsersearchAdapter(getActivity(),usersearchModelList);
+        usersearchAdapter = new UsersearchAdapter(getActivity(),usersearchModelList,userid);
         recyclerview.setAdapter(usersearchAdapter);
 
         return view;

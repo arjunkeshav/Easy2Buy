@@ -22,9 +22,10 @@ public class TabUsersearchAdapter extends FragmentStatePagerAdapter {
     private ArrayList<String> productVendor;
     private ArrayList<String> productOffer;
     private ArrayList<String> productId;
+    private String userid;
 
 
-    public TabUsersearchAdapter(FragmentManager fm, int  mnumoftabs,ArrayList<String> productUri, ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId) {
+    public TabUsersearchAdapter(FragmentManager fm, int  mnumoftabs,ArrayList<String> productUri, ArrayList<String> productName,ArrayList<String> productPrice,ArrayList<String> productDist,ArrayList<String> productVendor,ArrayList<String> productOffer,ArrayList<String> productId,String userid) {
         super(fm);
         this.numoftabs = mnumoftabs;
         this.productUri = productUri;
@@ -34,6 +35,8 @@ public class TabUsersearchAdapter extends FragmentStatePagerAdapter {
         this.productVendor =productVendor;
         this.productOffer =productOffer;
         this.productId = productId;
+        this.userid = userid;
+
 
 
 
@@ -43,11 +46,11 @@ public class TabUsersearchAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                Nearby tab1 = new Nearby(productUri,productName,productPrice,productDist,productVendor,productOffer,productId);
+                Nearby tab1 = new Nearby(productUri,productName,productPrice,productDist,productVendor,productOffer,productId,userid);
                 return tab1;
 
             case 1:
-                Popular tab2 = new Popular(productUri,productName,productPrice,productDist,productVendor,productOffer,productId);
+                Popular tab2 = new Popular(productUri,productName,productPrice,productDist,productVendor,productOffer,productId,userid);
                 return tab2;
 
 //            case 2:

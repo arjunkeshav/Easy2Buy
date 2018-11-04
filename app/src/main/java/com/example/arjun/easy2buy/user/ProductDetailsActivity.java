@@ -13,7 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.example.arjun.easy2buy.R;
 import com.example.arjun.easy2buy.newadmin.ProductReviewModel;
+import com.example.arjun.easy2buy.newadmin.ProductReviewAdapter;
+import com.example.arjun.easy2buy.newadmin.UserDetails_AdminEdit;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,9 +39,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import me.relex.circleindicator.CircleIndicator;
+import model.Followers;
 
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -63,15 +67,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     TextView txtProductName;
     TextView txtVendorName;
+    TextView txtDesc;
     ImageView imgProduct;
     ImageView post;
     EditText review;
     String uid;
+    String userid;
+    String userName;
+    String userImage;
     LinearLayout layout;
+    LinearLayout follow;
     Button buttonDirection;
     double sourcelat,sourcelong,destinationlat,destinationlong;
     private FusedLocationProviderClient client;
     String vendorId;
+    RecyclerView recyclerViewReview;
+    ArrayList<ProductReviewModel> product_review_array =new ArrayList<ProductReviewModel>();
+    ProductReviewAdapter v;
+
 
 
 
@@ -86,12 +99,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
 
+        try {
+            uid = getIntent().getStringExtra("uid");
+            userid = getIntent().getStringExtra("userid");
+
+            String dist = getIntent().getStringExtra("distance");
+        } catch (Exception e) {
+        }
+        Log.e("data", uid);
+
+
         client = LocationServices.getFusedLocationProviderClient(this);
 
         imgProduct = findViewById(R.id.imageProduct);
         txtProductName= findViewById(R.id.txtProductName);
         txtVendorName = findViewById(R.id.txtVendorName);
         buttonDirection = findViewById(R.id.buttonDirection);
+        txtDesc= findViewById(R.id.txtDesc);
         buttonDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +139,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
+        follow = findViewById(R.id.layoutfollow);
+        follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                followed();
+            }
+        });
+
 
 
 
@@ -124,9 +156,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addReview();
+
+                if(userName==null && userImage == null){
+                    setUserName();
+                }
+                else{
+                    addReview();
+                }
+
             }
         });
+
 
         review = findViewById(R.id.review);
         layout = findViewById(R.id.layoutCaller);
@@ -139,20 +179,68 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        databaseReference.child(userid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userImage = (String) dataSnapshot.child("profileImage").getValue();
+                userName = (String) dataSnapshot.child("username").getValue();
+                Toast.makeText(ProductDetailsActivity.this,userName,Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
-        recyclerView = findViewById(R.id.RecyclerView_Food5_Detail_Id);
-        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ProductDetailsActivity.this,LinearLayoutManager.HORIZONTAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        uid = getIntent().getStringExtra("uid");
-
-        String dist = getIntent().getStringExtra("distance");
+//        recyclerView = findViewById(R.id.RecyclerView_Food5_Detail_Id);
+//        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ProductDetailsActivity.this,LinearLayoutManager.HORIZONTAL,false);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        final DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
+
+// recycler view for review
+
+        recyclerViewReview = findViewById(R.id.recyReview);
+
+        DatabaseReference mDatabase;
+// ...
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+        mDatabase.child("productReviews").orderByChild("productId").equalTo(uid)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren())
+                        {
+                            ProductReviewModel user = childDataSnapshot.getValue(ProductReviewModel.class);
+                            product_review_array.add(user);
+
+                        }
+                        Log.e("productreview",""+ product_review_array.size()); //displays the key for the node
+                        recyclerViewReview.setLayoutManager(new LinearLayoutManager(ProductDetailsActivity.this));
+                        v=new ProductReviewAdapter(ProductDetailsActivity.this, product_review_array);
+                        recyclerViewReview.setAdapter(v);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+
+         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("Product");
         mRef.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -161,6 +249,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     String itemName = (String)dataSnapshot.child("productName").getValue();
                     String itemPrice = (String)dataSnapshot.child("productPrice").getValue();
                     String itemImage = (String)dataSnapshot.child("productImage").getValue();
+                    String itemDesc = (String)dataSnapshot.child("productDesc").getValue();
                     destinationlat = (double)dataSnapshot.child("productLat").getValue();
                     destinationlong = (double)dataSnapshot.child("productLong").getValue();
                     vendorId = (String)dataSnapshot.child("vendorId").getValue();
@@ -169,6 +258,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     Picasso.with(ProductDetailsActivity.this).load(itemImage).into(imgProduct);
                     txtProductName.setText(itemName);
                     txtVendorName.setText(itemPrice);
+                    txtDesc.setText(itemDesc);
 
 
                 }
@@ -208,10 +298,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 //Recycle 2
 
-       // recyclerView = findViewById(R.id.RecyclerView2_Food5_Detail_Id);
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(ProductDetailsActivity.this);
-        recyclerView.setLayoutManager(layoutManager1);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//       recyclerView = findViewById(R.id.RecyclerView2_Food5_Detail_Id);
+////        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(ProductDetailsActivity.this);
+////        recyclerView.setLayoutManager(layoutManager1);
+////        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 //        modelArrayList2 = new ArrayList<>();
 
@@ -241,6 +331,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void setUserName() {
+         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        databaseReference.child(userid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userImage = (String) dataSnapshot.child("profileImage").getValue();
+                userName = (String) dataSnapshot.child("username").getValue();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void addReview() {
 
         DatabaseReference mDatabase;
@@ -249,11 +356,33 @@ public class ProductDetailsActivity extends AppCompatActivity {
         //  Random r = new Random();
         //  int i1 = r.nextInt(100 - 28) + 28;
         String reviewId= mDatabase.child("productReviews").push().getKey();
-        ProductReviewModel vendor=new ProductReviewModel(review.getText().toString(),uid,reviewId);
-        mDatabase.child("productReviews").child(String.valueOf(reviewId)).setValue(vendor).addOnSuccessListener(new OnSuccessListener<Void>() {
+        ProductReviewModel user=new ProductReviewModel(review.getText().toString(),uid,reviewId,userid,userName,userImage);
+        mDatabase.child("productReviews").child(String.valueOf(reviewId)).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getApplicationContext(),"Review added ",Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+    private void followed() {
+
+        DatabaseReference mDatabase;
+// ...
+        mDatabase = FirebaseDatabase.getInstance().getReference("followed");
+        //  Random r = new Random();
+        //  int i1 = r.nextInt(100 - 28) + 28;
+        String followId= mDatabase.child(vendorId).push().getKey();
+        Followers user=new Followers(userid,vendorId,followId);
+        mDatabase.child(vendorId).child(String.valueOf(followId)).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                Toast.makeText(getApplicationContext(),"Followed ",Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

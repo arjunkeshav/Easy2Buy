@@ -24,6 +24,7 @@ import model.UsersearchModel;
 public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.MyViewHolder> {
     Context context;
     private List<UsersearchModel> usersearchModelList;
+    String userid;
 
 
     @Override
@@ -42,6 +43,7 @@ public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.My
             public void onClick(View v) {
                 Intent intent =new Intent(context, ProductDetailsActivity.class);
                 intent.putExtra("uid",modelrecycler.getProductId());
+                intent.putExtra("userid",userid);
                 intent.putExtra("distance",modelrecycler.getNearbytext3());
                 context.startActivity(intent);
             }
@@ -85,8 +87,9 @@ public class UsersearchAdapter extends RecyclerView.Adapter<UsersearchAdapter.My
 
         }
     }
-    public UsersearchAdapter(Context mainActivityContacts, List<UsersearchModel> offerList) {
+    public UsersearchAdapter(Context mainActivityContacts, List<UsersearchModel> offerList,String userid) {
         this.usersearchModelList = offerList;
         this.context = mainActivityContacts;
+        this.userid = userid;
     }
 }

@@ -25,6 +25,8 @@ import com.example.arjun.easy2buy.R;
 import com.example.arjun.easy2buy.admin.AdminDashboardActivity;
 import com.example.arjun.easy2buy.login.SignInActivity;
 import com.example.arjun.easy2buy.map.MapsActivity;
+import com.example.arjun.easy2buy.update.Notify;
+import com.example.arjun.easy2buy.update.notify.FcmTokenUpload;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.roughike.bottombar.BottomBar;
 import com.squareup.picasso.Picasso;
 
@@ -155,7 +158,7 @@ public class UserHomeActivity extends AppCompatActivity {
                  }
             }
         });
-
+        sendRegistrationToServer();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -163,7 +166,14 @@ public class UserHomeActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if (id == R.id.action_refresh) {
 
+            Intent i=new Intent(UserHomeActivity.this, Notify.class);
+            startActivity(i);
+
+
+            return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             new PrefManager(UserHomeActivity.this).logout();
@@ -203,6 +213,17 @@ public class UserHomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void sendRegistrationToServer() {
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message_fcm");
+        String key = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //user id Firebaseuser
+        FcmTokenUpload n = new FcmTokenUpload(key, refreshedToken, FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        myRef.child(key).setValue(n);
     }
 
 }
